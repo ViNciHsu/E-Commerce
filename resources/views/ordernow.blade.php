@@ -23,21 +23,28 @@
                 </tr>
                 </tbody>
             </table>
-                <div>
-                    <form action="/orderplace" method="post">
-                        @csrf
-                        <div class="form-group">
-                            <textarea name="address" placeholder="enter your address" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Payment Method</label><br><br>
-                            <input type="radio" name="payment" value="Online"><span>Online payment</span><br><br>
-                            <input type="radio" name="payment" value="EMI"><span>EMI payment</span><br><br>
-                            <input type="radio" name="payment" value="cash"><span>Payment on Delivery</span><br><br>
-                        </div>
-                        <button type="submit" class="btn btn-default">Order Now</button>
-                    </form>
-                </div>
+            <div>
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        @foreach($errors->all() as $error)
+                            <strong>Warning!</strong>&nbsp;{{ $error }}
+                        @endforeach
+                    </div>
+                @endif
+                <form action="/orderplace" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <textarea name="address" placeholder="enter your address" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Payment Method</label><br><br>
+                        <input type="radio" name="payment" value="Online"><span>Online payment</span><br><br>
+                        <input type="radio" name="payment" value="EMI"><span>EMI payment</span><br><br>
+                        <input type="radio" name="payment" value="cash"><span>Payment on Delivery</span><br><br>
+                    </div>
+                    <button type="submit" class="btn btn-default">Order Now</button>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

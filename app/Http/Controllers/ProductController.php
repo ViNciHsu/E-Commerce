@@ -6,8 +6,10 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Validator;
 use Session;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Input\Input;
 
 class ProductController extends Controller
 {
@@ -109,20 +111,28 @@ class ProductController extends Controller
         $userId = Session::get('user')['id'];
         $allCart = Cart::where('user_id',$userId)->get();
 //        dd($allCart);
-        foreach ($allCart as $cart)
-        {
-            $order = new Order;
-            $order->product_id = $cart['product_id'];
-            $order->user_id = $cart['user_id'];
-            $order->status = "pending";
-            $order->payment_method = $request->payment;
-            $order->payment_status = "pending";
-            $order->address = $request->address;
-            $order->save();
-            Cart::where('user_id',$userId)->delete();
+        $input = $request->input();
+        $rules = ['address' => 'required|min:5'];
+//        $messages = ['required' => '欄位不能空白，且字數必須超過5個字'];
+        $validator = Validator::make($input, $rules);
+        if($validator->passes()) {
+            foreach ($allCart as $cart) {
+                $order = new Order;
+                $order->product_id = $cart['product_id'];
+                $order->user_id = $cart['user_id'];
+                $order->status = "pending";
+                $order->payment_method = $request->payment;
+                $order->payment_status = "pending";
+                $order->address = $request->address;
+                $order->save();
+                Cart::where('user_id', $userId)->delete();
+            }
+            $request->input();
+            return redirect('/');
         }
-        $request->input();
-        return redirect('/');
+        return redirect('/ordernow')
+            ->withInput()
+            ->withErrors($validator);
     }
 
     function myOrders()
