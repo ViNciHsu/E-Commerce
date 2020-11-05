@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Validator;
+use phpDocumentor\Reflection\Types\Null_;
 use Session;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
@@ -139,14 +140,21 @@ class ProductController extends Controller
     {
 
 //        $userId = Session::get('user')['id'];
-        $userId = isset(Session::get('user')['id']) ? Session::get('user')['id'] : '';
-        $orders = $products = DB::table('orders')
-            ->join('products','orders.product_id','=','products.id')
-            ->where('orders.user_id',$userId)
-            // 加上 cart.id as cart_id 才能在 cartlist 中取得 cart.id 用來移除購物車商品
-            ->get();
+        $userId = isset(Session::get('user')['id']) ? Session::get('user')['id'] : Null;
+        if(isset($userId) && $userId != Null)
+        {
+            $orders = $products = DB::table('orders')
+                ->join('products', 'orders.product_id', '=', 'products.id')
+                ->where('orders.user_id', $userId)
+                // 加上 cart.id as cart_id 才能在 cartlist 中取得 cart.id 用來移除購物車商品
+                ->get();
 
-        return view('myorders', ['orders' => $orders]);
+            return view('myorders', ['orders' => $orders]);
+        }
+        else
+        {
+            return redirect('/');
+        }
     }
 }
 

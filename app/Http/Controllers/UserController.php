@@ -14,7 +14,7 @@ class UserController extends Controller
         $user = User::where(['email'=>$request->email])->first();
         if(!$user || !Hash::check($request->password,$user->password))
         {
-            return "使用者帳號或密碼不符";
+            return redirect('/login');
         }
         else
         {
