@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Str;
-
+// 額外加上去
+$db_config = get_db_config();
 return [
 
     /*
@@ -15,8 +16,9 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
-
+//    'default' => env('DB_CONNECTION', 'mysql'),
+    // 額外加上去
+    'default' => $db_config['connection'],
     /*
     |--------------------------------------------------------------------------
     | Database Connections
@@ -63,19 +65,32 @@ return [
             ]) : [],
         ],
 
+//        'pgsql' => [
+//            'driver' => 'pgsql',
+//            'url' => env('DATABASE_URL'),
+//            'host' => env('DB_HOST', '127.0.0.1'),
+//            'port' => env('DB_PORT', '5432'),
+//            'database' => env('DB_DATABASE', 'forge'),
+//            'username' => env('DB_USERNAME', 'forge'),
+//            'password' => env('DB_PASSWORD', ''),
+//            'charset' => 'utf8',
+//            'prefix' => '',
+//            'prefix_indexes' => true,
+//            'schema' => 'public',
+//            'sslmode' => 'prefer',
+//        ],
+        // 修改pgsql
         'pgsql' => [
-            'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'schema' => 'public',
-            'sslmode' => 'prefer',
+            'driver'   => 'pgsql',
+            'host'     => $db_config['host'],
+            'port'     => env('DB_PORT', '5432'),
+            'database' => $db_config['database'],
+            'username' => $db_config['username'],
+            'password' => $db_config['password'],
+            'charset'  => 'utf8',
+            'prefix'   => '',
+            'schema'   => 'public',
+            'sslmode'  => 'prefer',
         ],
 
         'sqlsrv' => [
