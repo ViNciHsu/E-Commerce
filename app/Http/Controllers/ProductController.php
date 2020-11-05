@@ -19,7 +19,7 @@ class ProductController extends Controller
 //        $data = Product::all();
         $data = DB::table('products')
 //            ->orderBy('id','desc')
-            ->paginate(2);
+            ->paginate(10);
         return view('product',['products' => $data]);
     }
 

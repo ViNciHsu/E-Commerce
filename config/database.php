@@ -79,7 +79,7 @@ return [
 //            'schema' => 'public',
 //            'sslmode' => 'prefer',
 //        ],
-        // 修改pgsql
+        //
         'pgsql' => [
             'driver'   => 'pgsql',
             'host'     => $db_config['host'],
