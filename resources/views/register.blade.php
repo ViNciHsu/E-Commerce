@@ -3,6 +3,13 @@
     <div class="container custom-login">
         <div class="row">
             <div class="col-sm-4 col-sm-offset-4">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        @foreach($errors->all() as $error)
+                            <strong>Warning!</strong>&nbsp;{{ $error }}
+                        @endforeach
+                    </div>
+                @endif
                 <form action="register" method="post">
                     @csrf
                     <div class="form-group">

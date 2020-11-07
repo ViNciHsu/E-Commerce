@@ -7,8 +7,8 @@
                 @foreach($products as $item)
                     <li data-target="#myCarousel" data-slide-to="{{ $item->id -1 }}" class="{{ $item->id == 1?'active':''}}"></li>
                 @endforeach
-{{--                <li data-target="#myCarousel" data-slide-to="1"></li>--}}
-{{--                <li data-target="#myCarousel" data-slide-to="2"></li>--}}
+                {{--                <li data-target="#myCarousel" data-slide-to="1"></li>--}}
+                {{--                <li data-target="#myCarousel" data-slide-to="2"></li>--}}
             </ol>
 
             <!-- Wrapper for slides -->
@@ -36,20 +36,23 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        <div class="trending-wrapper">
-            <h3>Trending Products</h3>
-            @foreach($products as $item)
-            <div class="trending-item">
-                <a href="detail/{{ $item->id }}">
-                    <img class="trending-image" src="{{ $item->gallery }}">
-                    <div class="">
-                        <h3>{{ $item->name }}</h3>
-                    </div>
-                </a>
+        <div class="container">
+            <div class="row">
+                <div class="trending-wrapper">
+                    <h3>Trending Products</h3>
+                    @foreach($products as $item)
+                        <div class="trending-item col-xs-4">
+                            <a href="detail/{{ $item->id }}">
+                                <img class="trending-image img-rounded img-responsive" src="{{ $item->gallery }}">
+                                <div class="">
+                                    <h3>{{ $item->name }}</h3>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-            @endforeach
         </div>
-
     </div>
     {{ $products->links() }}
 
