@@ -28,8 +28,8 @@
                 <br>
 
                 <p>- OR -</p>
-                <a href="{{ URL::asset('/google-sign-in') }}" class="btn btn-block btn-danger">
-                    <i class="fa fa-google mr-2"></i> Sign in using Google
+                <a href="/google-sign-in" class="btn btn-block btn-danger">
+                    <i class="fa fa-google mr-2"></i> Login With Google
                 </a>
 {{--                <a href="/facebook/link" class="btn btn-block btn-primary"> 測試 fb登入 </a>--}}
 

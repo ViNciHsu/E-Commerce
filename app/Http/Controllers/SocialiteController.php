@@ -11,7 +11,13 @@ class SocialiteController extends Controller
 {
     public function googleSignInProcess()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')
+            ->with(
+                ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
+                ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'],
+                ['redirect' => 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback'])
+//                ['redirect' => 'http://localhost:8000/google-sign-in-callback'])
+            ->redirect();
     }
 
     public function googleSignInCallbackProcess()
