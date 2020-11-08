@@ -22,8 +22,8 @@ class SocialiteController extends Controller
 
     public function googleSignInCallbackProcess()
     {
-//        $user = Socialite::driver('google')->user();
-//        dd($user);
+        $user = Socialite::driver('google')->user();
+        dd($user);
         try {
             $user = Socialite::driver('google')->user();
         } catch (\Exception $e) {
