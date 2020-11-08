@@ -11,7 +11,16 @@ class SocialiteController extends Controller
 {
     public function googleSignInProcess()
     {
-        $test = Socialite::driver('google')
+//        $test = Socialite::driver('google')
+//            ->stateless()
+//            ->with(
+//                ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
+//                ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'],
+//                ['redirect' => 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback'])
+////                ['redirect' => 'http://localhost:8000/google-sign-in-callback'])
+//            ->redirect();
+//        dd($test);
+        return Socialite::driver('google')
             ->stateless()
             ->with(
                 ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
@@ -19,20 +28,12 @@ class SocialiteController extends Controller
                 ['redirect' => 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback'])
 //                ['redirect' => 'http://localhost:8000/google-sign-in-callback'])
             ->redirect();
-        dd($test);
-//        return Socialite::driver('google')->redirect();
-//            ->with(
-//                ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
-//                ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'],
-//                ['redirect' => 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback'])
-////                ['redirect' => 'http://localhost:8000/google-sign-in-callback'])
-//            ->redirect();
     }
 
     public function googleSignInCallbackProcess()
     {
-        $user = Socialite::driver('google')->stateless()->user();
-        dd($user);
+//        $user = Socialite::driver('google')->stateless()->user();
+//        dd($user);
         try {
             $user = Socialite::driver('google')->user();
         } catch (\Exception $e) {
