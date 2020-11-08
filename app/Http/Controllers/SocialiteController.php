@@ -11,7 +11,7 @@ class SocialiteController extends Controller
 {
     public function googleSignInProcess()
     {
-        $test = Socialite::driver('google')->redirect();
+        $test = Socialite::driver('google')->stateless()->redirect();
         dd($test);
 //        return Socialite::driver('google')->redirect();
 //            ->with(
@@ -24,7 +24,7 @@ class SocialiteController extends Controller
 
     public function googleSignInCallbackProcess()
     {
-        $user = Socialite::driver('google')->user();
+        $user = Socialite::driver('google')->stateless()->user();
         dd($user);
         try {
             $user = Socialite::driver('google')->user();
