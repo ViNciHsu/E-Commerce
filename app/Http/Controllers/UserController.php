@@ -178,13 +178,13 @@ class UserController extends Controller
     public function facebookLink(Request $request)
     {
         //紀錄一開始頁面的url,因為登入成功後要跳轉回來
-        $redirect_url = env('FB_REDIRECT');
-//        Session::flash('url',$request->server('HTTP_REFERER'));
-//        return Socialite::driver('facebook')->redirect();
-        return Socialite::driver('facebook')
-//            ->scopes(['user_friends'])
-            ->redirectUrl($redirect_url)
-            ->redirect();
+//        $redirect_url = env('FB_REDIRECT');
+        Session::flash('url',$request->server('HTTP_REFERER'));
+        return Socialite::driver('facebook')->redirect();
+//        return Socialite::driver('facebook')
+////            ->scopes(['user_friends'])
+//            ->redirectUrl($redirect_url)
+//            ->redirect();
     }
 
     public function facebookCallback()
