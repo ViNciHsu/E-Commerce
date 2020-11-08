@@ -29,20 +29,20 @@ if(Session::has('user'))
                 <div class="form-group">
                     <input name="query" type="text" class="form-control search-box" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default">Search</button>
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i>&nbsp;Search</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/cartlist">Cart({{ $total }})</a></li>
                 @if(Session::has('user'))
+                    <li><a href="/cartlist"><i class="fa fa-shopping-cart">&nbsp;</i>Cart({{ $total }})</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ Session::get('user')['name'] }}
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user">&nbsp;</i>{{ Session::get('user')['name'] }}
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/logout">Logout</a></li>
+                            <li><a href="/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
                         </ul>
                     </li>
                 @else
-                    <li><a href="/login">Login</a></li>
+                    <li><a href="/login"><i class="fa fa-sign-in"></i>Login</a></li>
                     <li><a href="/register">Register</a></li>
                 @endif
 

@@ -18,6 +18,10 @@
     <script src="sweetalert2.all.min.js"></script>
     <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <!-- use-font-awesome-icons-in-laravel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
+
 </head>
 <body>
     {{View::make('header')}}
@@ -61,6 +65,10 @@
         border-bottom: 1px solid #ccc;
         margin-bottom: 20px;
         padding-bottom: 20px;
+    }
+    img{
+        max-width:100%; /*不使用width:100% 是因避免圖片解析度不好，隨父元素被放大時會糊掉*/
+        height:auto;
     }
 </style>
 </html>

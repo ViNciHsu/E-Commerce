@@ -36,3 +36,11 @@ Route::get('ordernow',[ProductController::class,'orderNow']);
 Route::post('orderplace',[ProductController::class,'orderPlace']);
 Route::get('myorders',[ProductController::class,'myOrders']);
 
+// Facebook 登入
+Route::get('/facebook-sign-in', [UserController::class,'facebookSignInProcess']);
+// Facebook 登入重新導向授權資料處理
+Route::get('/facebook-sign-in-callback', [UserController::class,'facebookSignInCallbackProcess']);
+
+//第三方登入
+Route::get('/facebook/link',[UserController::class,'facebookLink']);
+Route::get('/facebook/callback',[UserController::class,'facebookCallback']);
