@@ -21,7 +21,16 @@
     <!-- use-font-awesome-icons-in-laravel -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
-
+    <script>
+        var uri = window.location.href.split(/\?|#/)[0];
+        // var uri = window.location.pathname;
+        alert(uri);
+        // // Returns http://example.com/something
+        //
+        // var hash = window.location.hash;
+        // alert(hash);
+        // Returns #hash
+    </script>
 </head>
 <body>
     {{View::make('header')}}

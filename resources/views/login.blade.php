@@ -21,17 +21,21 @@
                     <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                 </div>
                 <br>
-                <button type="submit" class="btn btn-success btn-block">Login</button>
+                <button type="submit" class="btn btn-info btn-block">Login</button>
             </form>
 
             <div class="social-auth-links text-center mb-3">
                 <br>
-                <a href="/facebook/link" class="btn btn-block btn-primary"> 測試 fb登入 </a>
 
                 <p>- OR -</p>
-                <a href="{{ URL::asset('/facebook-sign-in') }}" class="btn btn-block btn-primary">
-                    <i class="fa fa-facebook mr-2"></i> Sign in using Facebook
+                <a href="{{ URL::asset('/google-sign-in') }}" class="btn btn-block btn-danger">
+                    <i class="fa fa-google mr-2"></i> Sign in using Google
                 </a>
+{{--                <a href="/facebook/link" class="btn btn-block btn-primary"> 測試 fb登入 </a>--}}
+
+{{--                <a href="{{ URL::asset('/facebook-sign-in') }}" class="btn btn-block btn-primary">--}}
+{{--                    <i class="fa fa-facebook mr-2"></i> Sign in using Facebook--}}
+{{--                </a>--}}
 {{--                    <a href="/user/auth/github-sign-in" class="btn btn-block" style="background-color: #111111;color: #ffffff">--}}
 {{--                        <i class="fa fa-github mr-2"></i> Sign in using Github--}}
 {{--                    </a>--}}

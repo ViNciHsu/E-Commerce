@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SocialiteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,11 +37,16 @@ Route::get('ordernow',[ProductController::class,'orderNow']);
 Route::post('orderplace',[ProductController::class,'orderPlace']);
 Route::get('myorders',[ProductController::class,'myOrders']);
 
+
+// Google 登入
+Route::get('/google-sign-in', [SocialiteController::class,'googleSignInProcess']);
+Route::get('/google-sign-in-callback', [SocialiteController::class,'googleSignInCallbackProcess']);
+
 // Facebook 登入
-Route::get('/facebook-sign-in', [UserController::class,'facebookSignInProcess']);
+Route::get('/facebook-sign-in', [SocialiteController::class,'facebookSignInProcess']);
 // Facebook 登入重新導向授權資料處理
-Route::get('/facebook-sign-in-callback', [UserController::class,'facebookSignInCallbackProcess']);
+Route::get('/facebook-sign-in-callback', [SocialiteController::class,'facebookSignInCallbackProcess']);
 
 // 第三方登入
-Route::get('/facebook/link',[UserController::class,'facebookLink']);
-Route::get('/facebook/callback',[UserController::class,'facebookCallback']);
+Route::get('/facebook/link',[SocialiteController::class,'facebookLink']);
+Route::get('/facebook/callback',[SocialiteController::class,'facebookCallback']);

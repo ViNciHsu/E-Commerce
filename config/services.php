@@ -36,4 +36,11 @@ return [
         'client_secret' => env('FB_CLIENT_SECRET'),
         'redirect'      => env('FB_REDIRECT'),
     ],
+
+    // google 登入
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),         // Your Google Client ID
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'), // Your Google Client Secret
+        'redirect' => 'http://localhost:8000/google-sign-in-callback',
+    ],
 ];
