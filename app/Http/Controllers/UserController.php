@@ -182,10 +182,6 @@ class UserController extends Controller
 //        $redirect_url = env('FB_REDIRECT');
         Session::flash('url',$request->server('HTTP_REFERER'));
         return Socialite::driver('facebook')->redirect();
-//        return Socialite::driver('facebook')
-////            ->scopes(['user_friends'])
-//            ->redirectUrl($redirect_url)
-//            ->redirect();
     }
 
     public function facebookCallback()
