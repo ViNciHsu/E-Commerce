@@ -44,7 +44,7 @@
                         <div class="trending-item col-12 col-md-6 col-lg-4">
                             <a href="detail/{{ $item->id }}">
                                 <img class="trending-image img-rounded img-responsive" src="{{ $item->gallery }}">
-                                <div class="">
+                                <div class="col-sm-6 col-md-3">
                                     <h3>{{ $item->name }}</h3>
                                 </div>
                             </a>
