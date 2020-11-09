@@ -30,8 +30,8 @@ class SocialiteController extends Controller
                 'https://www.googleapis.com/auth/plus.me'])
             ->with(
                 ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
-                ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'],
-                ['redirect' => 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?client_id=453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Fgoogle-sign-in-callback&scope=openid%20profile%20email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.me&response_type=code&state=QRuW0Lpph23IFlRmWgOttWDRLLwJ9Aj04noPUgL3&flowName=GeneralOAuthFlow'])
+                ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'])
+//                ['redirect' => '/google-sign-in-callback'])
 //            ->redirectUrl($redirect_url)
             ->redirect();
 
@@ -49,8 +49,8 @@ class SocialiteController extends Controller
                     'https://www.googleapis.com/auth/plus.me'])
                 ->with(
                     ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
-                    ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'],
-                    ['redirect' => 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?client_id=453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Fgoogle-sign-in-callback&scope=openid%20profile%20email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.me&response_type=code&state=QRuW0Lpph23IFlRmWgOttWDRLLwJ9Aj04noPUgL3&flowName=GeneralOAuthFlow'])
+                    ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'])
+//                    ['redirect' => 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback'])
 //            ->redirectUrl($redirect_url)
 //                ->redirect()
                 ->stateless()
