@@ -25,7 +25,7 @@
                         <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-default">Register</button>
+                    <button type="submit" class="btn btn-default btn-block">Register</button>
                 </form>
             </div>
         </div>
