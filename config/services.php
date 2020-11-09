@@ -39,8 +39,8 @@ return [
 
     // google 登入
     'google' => [
-        'client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com',         // Your Google Client ID
-        'client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS', // Your Google Client Secret
-        'redirect' => 'https://ecom-laravel8.herokuapp.com/google-sign-in-callback',
+        'client_id' => env('GOOGLE_CLIENT_ID'),         // Your Google Client ID
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'), // Your Google Client Secret
+        'redirect' => env('GOOGLE_REDIRECT'),
     ],
 ];
