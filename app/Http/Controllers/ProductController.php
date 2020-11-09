@@ -78,13 +78,14 @@ class ProductController extends Controller
     function cartList()
     {
         $userId = Session::get('user')['id'];
+
         $products = DB::table('cart')
             ->join('products','cart.product_id','=','products.id')
             ->where('cart.user_id',$userId)
             // 加上 cart.id as cart_id 才能在 cartlist 中取得 cart.id 用來移除購物車商品
             ->select('products.*','cart.id as cart_id')
             ->get();
-
+//        dd($products);
         return view('cartlist', ['products' => $products]);
     }
 
@@ -97,12 +98,20 @@ class ProductController extends Controller
     function orderNow()
     {
         $userId = Session::get('user')['id'];
+//        dd($userId);
+//        $total = $products = DB::table('cart')
+//            ->join('products','cart.product_id','=','products.id')
+//            ->where('cart.user_id',$userId)
+//            // 加上 cart.id as cart_id 才能在 cartlist 中取得 cart.id 用來移除購物車商品
+//            ->sum('products.price');
+
         $total = $products = DB::table('cart')
             ->join('products','cart.product_id','=','products.id')
             ->where('cart.user_id',$userId)
             // 加上 cart.id as cart_id 才能在 cartlist 中取得 cart.id 用來移除購物車商品
-            ->sum('products.price');
 
+            ->sum('products.price');
+//        dd($total);
         return view('ordernow', ['total' => $total]);
     }
 
