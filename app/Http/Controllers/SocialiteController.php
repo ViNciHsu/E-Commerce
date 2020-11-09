@@ -20,8 +20,11 @@ class SocialiteController extends Controller
 ////                ['redirect' => 'http://localhost:8000/google-sign-in-callback'])
 //            ->redirect();
 //        dd($test);
-        $redirect_url = env('GOOGLE_REDIRECT');
+        $redirect_url = 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback';
         return Socialite::driver('google')
+            ->scopes(['https://www.googleapis.com/auth/userinfo.profile',
+                'https://www.googleapis.com/auth/userinfo.email',
+                'https://www.googleapis.com/auth/plus.me'])
             ->redirectUrl($redirect_url)
             ->redirect();
 
@@ -31,9 +34,12 @@ class SocialiteController extends Controller
     {
 //        $user = Socialite::driver('google')->stateless()->user();
 //        dd($user);
-        $redirect_url = env('GOOGLE_REDIRECT','http://ecom-laravel8.herokuapp.com/google-sign-in-callback');
+        $redirect_url = 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback';
         try {
             $user = Socialite::driver('google')
+                ->scopes(['https://www.googleapis.com/auth/userinfo.profile',
+                    'https://www.googleapis.com/auth/userinfo.email',
+                    'https://www.googleapis.com/auth/plus.me'])
                 ->redirectUrl($redirect_url)
                 ->stateless()
                 ->user();
