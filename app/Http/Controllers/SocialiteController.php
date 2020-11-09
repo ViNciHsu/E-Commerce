@@ -42,7 +42,7 @@ class SocialiteController extends Controller
 //        $user = Socialite::driver('google')->stateless()->user();
 //        dd($user);
 //        $redirect_url = env('GOOGLE_REDIRECT');
-        try {
+//        try {
             $user = Socialite::driver('google')
                 ->scopes(['https://www.googleapis.com/auth/userinfo.profile',
                     'https://www.googleapis.com/auth/userinfo.email',
@@ -55,9 +55,9 @@ class SocialiteController extends Controller
 //                ->redirect()
                 ->stateless()
                 ->user();
-        } catch (\Exception $e) {
-            return redirect('/login');
-        }
+//        } catch (\Exception $e) {
+//            return redirect('/login');
+//        }
         // only allow people with @company.com to login
 //        if(explode("@", $user->email)[1] !== 'company.com'){
 //            return redirect()->to('/');
