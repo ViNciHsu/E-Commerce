@@ -20,8 +20,8 @@ class SocialiteController extends Controller
 ////                ['redirect' => 'http://localhost:8000/google-sign-in-callback'])
 //            ->redirect();
 //        dd($test);
-        $redirect_url = env('GOOGLE_REDIRECT');
-        dd($redirect_url);
+        $redirect_url = 'http://localhost:8000/google-sign-in-callback';
+//        dd($redirect_url);
         return Socialite::driver('google')
             ->scopes(['https://www.googleapis.com/auth/userinfo.profile',
                 'https://www.googleapis.com/auth/userinfo.email',
@@ -35,7 +35,7 @@ class SocialiteController extends Controller
     {
 //        $user = Socialite::driver('google')->stateless()->user();
 //        dd($user);
-        $redirect_url = env('GOOGLE_REDIRECT');
+        $redirect_url = 'http://localhost:8000/google-sign-in-callback';
         try {
             $user = Socialite::driver('google')
                 ->redirectUrl($redirect_url)
