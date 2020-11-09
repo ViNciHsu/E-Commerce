@@ -31,7 +31,7 @@ class SocialiteController extends Controller
     {
 //        $user = Socialite::driver('google')->stateless()->user();
 //        dd($user);
-        $redirect_url = env('GOOGLE_REDIRECT');
+        $redirect_url = env('GOOGLE_REDIRECT','http://ecom-laravel8.herokuapp.com/google-sign-in-callback');
         try {
             $user = Socialite::driver('google')
                 ->redirectUrl($redirect_url)
