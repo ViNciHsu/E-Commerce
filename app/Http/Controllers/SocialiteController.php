@@ -24,7 +24,7 @@ class SocialiteController extends Controller
         return Socialite::driver('google')
             ->redirectUrl($redirect_url)
             ->redirect();
-        
+
     }
 
     public function googleSignInCallbackProcess()
