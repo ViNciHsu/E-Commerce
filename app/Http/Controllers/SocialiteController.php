@@ -11,17 +11,17 @@ class SocialiteController extends Controller
 {
     public function googleSignInProcess()
     {
-        $test = Socialite::driver('google')
-            ->scopes(['https://www.googleapis.com/auth/userinfo.profile',
-                'https://www.googleapis.com/auth/userinfo.email',
-                'https://www.googleapis.com/auth/plus.me'])
-            ->with(
-                ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
-                ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'],
-                ['redirect' => 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback'])
-//            ->redirectUrl($redirect_url)
-            ->redirect();
-        dd($test);
+//        $test = Socialite::driver('google')
+//            ->scopes(['https://www.googleapis.com/auth/userinfo.profile',
+//                'https://www.googleapis.com/auth/userinfo.email',
+//                'https://www.googleapis.com/auth/plus.me'])
+//            ->with(
+//                ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
+//                ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'],
+//                ['redirect' => 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback'])
+////            ->redirectUrl($redirect_url)
+//            ->redirect();
+//        dd($test);
 //        $redirect_url = env('GOOGLE_REDIRECT');
 //        dd($redirect_url);
         return Socialite::driver('google')
@@ -32,7 +32,7 @@ class SocialiteController extends Controller
                 ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
                 ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'],
                 ['redirect' => 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback'])
-            ->redirectUrl($redirect_url)
+//            ->redirectUrl($redirect_url)
             ->redirect();
 
     }
@@ -41,10 +41,18 @@ class SocialiteController extends Controller
     {
 //        $user = Socialite::driver('google')->stateless()->user();
 //        dd($user);
-        $redirect_url = env('GOOGLE_REDIRECT');
+//        $redirect_url = env('GOOGLE_REDIRECT');
         try {
             $user = Socialite::driver('google')
-                ->redirectUrl($redirect_url)
+                ->scopes(['https://www.googleapis.com/auth/userinfo.profile',
+                    'https://www.googleapis.com/auth/userinfo.email',
+                    'https://www.googleapis.com/auth/plus.me'])
+                ->with(
+                    ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
+                    ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'],
+                    ['redirect' => 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback'])
+//            ->redirectUrl($redirect_url)
+//                ->redirect()
                 ->stateless()
                 ->user();
         } catch (\Exception $e) {
