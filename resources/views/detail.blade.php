@@ -19,7 +19,7 @@
 
                </form>
                <br><br>
-               <button class="btn btn-success">Buy Now</button>
+{{--               <button class="btn btn-success">Buy Now</button>--}}
            </div>
        </div>
     </div>

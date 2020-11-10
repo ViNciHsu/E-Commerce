@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class SocialiteController extends Controller
 {
+    public function __construct(Socialite $socialite){
+        $this->socialite = $socialite;
+    }
+
     public function googleSignInProcess()
     {
 //        $test = Socialite::driver('google')

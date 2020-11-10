@@ -2,43 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Socialite;
 
-class UserController extends Controller
+class AdminController extends Controller
 {
-    function login(Request $request)
+    //
+    public function productsManageListPage()
     {
-        $error_message = [
-            'msg' => [
-                'Incorrect E-mail or password,
-                 please reconfirm your E-mail and password！',
-            ],
-        ];
-        $user = User::where(['email'=>$request->email])->first();
-//        dd($user->email);
-        if(!$user || !Hash::check($request->password,$user->password))
-        {
-            return redirect('/login')
-                ->withErrors($error_message)
-                ->withInput();
-        }
-        else
-        {
-            $request->session()->put('user',$user);
-            return redirect('/');
-        }
-
-
+        return view('admin');
     }
 
-    function register(Request $request)
+    public function addAccount(Request $request)
     {
+
         $input = $request->input();
+
         // 驗證規則
         $rules = [
             //name
@@ -64,21 +45,23 @@ class UserController extends Controller
                  please try a new one！',
             ],
         ];
+
         //驗證資料
         $validator = Validator::make($input, $rules);
-//        dd($user);
+//        dd($validator);
         if($validator->fails())
         {
             //資料驗證錯誤
-            return redirect('register')
+            return redirect('admin')
                 ->withErrors($validator)
                 ->withInput();
         }
+
         $userEmail = User::where(['email'=>$request->email])->first();
-//        dd($userAccount);
+
         if($userEmail)
         {
-            return redirect('register')
+            return redirect('admin')
                 ->withErrors($error_message)
                 ->withInput();
         }
@@ -88,6 +71,9 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-        return redirect('login');
+//        dd($user);
+        $success = true;
+        return redirect('admin')->with('status', 'Account added successfully！');
+
     }
 }

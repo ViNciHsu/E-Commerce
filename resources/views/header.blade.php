@@ -5,6 +5,8 @@ if(Session::has('user'))
 {
     $total = ProductController::cartItem();
 }
+
+//$session_user_email = UserController::admin();
 ?>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -38,6 +40,9 @@ if(Session::has('user'))
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user">&nbsp;</i>{{ Session::get('user')['name'] }}
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            @if(Session::get('user')['email'] == "admin@gmail.com")
+                                <li><a href="/admin"><i class="fa fa-sign-out"></i>Admin Panel</a></li>
+                            @endif
                             <li><a href="/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
                         </ul>
                     </li>

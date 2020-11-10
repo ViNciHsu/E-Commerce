@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SocialiteController;
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,10 @@ Route::get('removecart/{id}',[ProductController::class,'removeCart']);
 Route::get('ordernow',[ProductController::class,'orderNow']);
 Route::post('orderplace',[ProductController::class,'orderPlace']);
 Route::get('myorders',[ProductController::class,'myOrders']);
+
+// admin
+Route::get('admin',[AdminController::class,'productsManageListPage']);
+Route::post('/admin',[AdminController::class,'addAccount']);
 
 
 // Google 登入
