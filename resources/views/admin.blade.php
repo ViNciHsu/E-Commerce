@@ -2,13 +2,13 @@
 @section('content')
     <div class="container">
         <ul class="nav nav-tabs">
-            <li><a href="#account" data-toggle="tab">Add User Account</a></li>
-            <li><a href="#board" data-toggle="tab">留言板</a></li>
-            <li><a href="#download" data-toggle="tab">下載區</a></li>
-            <li><a href="#config" data-toggle="tab">設定</a></li>
+            <li><a href="#add_account" data-toggle="tab">Add User Account</a></li>
+            <li><a href="#update_account" data-toggle="tab">User Account modification</a></li>
+            <li><a href="#download" data-toggle="tab">download</a></li>
+            <li><a href="#config" data-toggle="tab">config</a></li>
         </ul>
         <div class="tab-content" style="padding:10px;">
-            <div class="tab-pane active" id="account">
+            <div class="tab-pane active" id="add_account">
                 <p>Add User Account</p>
                 <div class="custom-product">
                     <div class="container">
@@ -67,14 +67,14 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane" id="board">
-                <p>這是留言板</p>
+            <div class="tab-pane" id="update_account">
+                <p>User Account modification</p>
             </div>
             <div class="tab-pane" id="download">
-                <p>這是下載區</p>
+                <p>download</p>
             </div>
             <div class="tab-pane" id="config">
-                <p>這是設定</p>
+                <p>config</p>
             </div>
         </div>
     </div>
