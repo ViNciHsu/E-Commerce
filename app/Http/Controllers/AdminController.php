@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Validator;
 class AdminController extends Controller
 {
     //
-    public function productsManageListPage()
+    public function addAccountListPage ()
     {
         $users = User::OrderBy('updated_at', 'desc')
-//            ->where('status', 'S')
+            ->where('email', '!=', 'admin@gmail.com')
             ->paginate(10);
-//            ->paginate(10);
+
 //        dd($users);
         return view('admin',[
             'users' => $users
@@ -26,7 +26,7 @@ class AdminController extends Controller
     {
 
         $input = $request->input();
-
+//dd($input);
         // 驗證規則
         $rules = [
             //name
@@ -59,7 +59,7 @@ class AdminController extends Controller
         if($validator->fails())
         {
             //資料驗證錯誤
-            return redirect('admin')
+            return redirect('admin/add')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -68,7 +68,7 @@ class AdminController extends Controller
 
         if($userEmail)
         {
-            return redirect('admin')
+            return redirect('admin/add')
                 ->withErrors($error_message)
                 ->withInput();
         }
@@ -80,7 +80,7 @@ class AdminController extends Controller
         $user->save();
 //        dd($user);
         $success = true;
-        return redirect('admin')->with('status', 'Account added successfully！');
+        return redirect('admin/add')->with('status', 'Account added successfully！');
 
     }
 

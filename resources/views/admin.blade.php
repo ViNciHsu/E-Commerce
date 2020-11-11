@@ -29,7 +29,7 @@
                                         <strong>{{ session('status') }}</strong>
                                     </div>
                                 @endif
-                                <form role="form" class="panel-body" action="/admin" method="post">
+                                <form role="form" class="panel-body" action="/admin/add" method="post">
                                     @csrf
                                     <div class="card-body">
                                         <div class="input-group mb-3">

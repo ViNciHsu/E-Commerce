@@ -84,19 +84,18 @@
                             </tr>
                             <tr>
                                 <form action="/admin/edit/{{ $user->id }}" method="post">
-                                <td>
-                                    <input type="text" name="update_name" value="{{ $user->name }}">
-                                </td>
-                                <td>
-                                    <input type="text" name="update_email" value="{{ $user->email }}">
-                                </td>
-                                <td>
+                                    @csrf
+                                    <td>
+                                        <input type="text" name="update_name" value="{{ $user->name }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="update_email" value="{{ $user->email }}">
+                                    </td>
+                                    <td>
+    {{--                                        @method('patch')--}}
+                                            <button type="submit" class="btn btn-primary">Edit</button>
 
-                                        @csrf
-{{--                                        @method('patch')--}}
-                                        <button type="submit" class="btn btn-primary">Edit</button>
-
-                                </td>
+                                    </td>
                                 </form>
 {{--                                <td>--}}
 {{--                                    <form action="/admin/{{ $user->id }}" method="post">--}}
