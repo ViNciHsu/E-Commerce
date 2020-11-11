@@ -99,7 +99,7 @@ class AdminController extends Controller
     {
         $user = User::all()->find($id);
 //        $user = User::where('id', '!=', $id)->get();
-//        dd($user);
+//        dd($users);
 
         return view('adminEdit',[
             'user' => $user
