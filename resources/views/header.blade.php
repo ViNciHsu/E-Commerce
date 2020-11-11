@@ -24,14 +24,14 @@ if(Session::has('user'))
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li class=""><a href="/myorders">Orders</a></li>
             </ul>
             <form action="/search" class="navbar-form navbar-left">
                 <div class="form-group">
                     <input name="query" type="text" class="form-control search-box" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i>&nbsp;Search</button>
+                <button type="submit" class="btn btn-outline-default"><i class="fa fa-search"></i>&nbsp;Search</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 @if(Session::has('user'))
@@ -41,7 +41,7 @@ if(Session::has('user'))
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @if(Session::get('user')['email'] == "admin@gmail.com")
-                                <li><a href="/admin"><i class="fa fa-sign-out"></i>Admin Panel</a></li>
+                                <li><a href="/admin/list"><i class="fa fa-sign-out"></i>Admin Panel</a></li>
                             @endif
                             <li><a href="/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
                         </ul>
@@ -50,7 +50,6 @@ if(Session::has('user'))
                     <li><a href="/login"><i class="fa fa-sign-in"></i>Login</a></li>
                     <li><a href="/register">Register</a></li>
                 @endif
-
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

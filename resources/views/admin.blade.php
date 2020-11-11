@@ -1,15 +1,18 @@
 @extends('master')
 @section('content')
     <div class="container">
-        <ul class="nav nav-tabs">
-            <li><a href="#add_account" data-toggle="tab">Add User Account</a></li>
-            <li><a href="#update_account" data-toggle="tab">User Account modification</a></li>
-            <li><a href="#download" data-toggle="tab">download</a></li>
-            <li><a href="#config" data-toggle="tab">config</a></li>
-        </ul>
+{{--        <h2>admin.blade.php</h2>--}}
+
+        {{--        <ul class="nav nav-tabs">--}}
+{{--            <li><a href="#add_account" data-toggle="tab">Add User Account</a></li>--}}
+{{--            <li><a href="#update_account" data-toggle="tab">User Account modification</a></li>--}}
+{{--            <li><a href="#download" data-toggle="tab">download</a></li>--}}
+{{--            <li><a href="#config" data-toggle="tab">config</a></li>--}}
+{{--        </ul>--}}
         <div class="tab-content" style="padding:10px;">
-            <div class="tab-pane active" id="add_account">
-                <p>Add User Account</p>
+{{--            <div class="tab-pane active" id="add_account">--}}
+                <a href="/admin"><i class="fa fa-plus"></i> Add User Account</a>&nbsp;&nbsp;&nbsp;
+                <a href="/admin/list"><i class="fa fa-edit"></i> User Account List</a>
                 <div class="custom-product">
                     <div class="container">
                         <div class="row">
@@ -53,10 +56,10 @@
                                         <div class="input-group">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <input type="reset" value="Clear" class="btn btn-danger" style="width: 100%">
+                                                    <input type="submit" value="Add" class="btn btn-primary">
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="submit" value="Add" class="btn btn-primary" style="width: 100%">
+{{--                                                    <input type="reset" value="Clear" class="btn btn-danger" style="width: 100%">--}}
                                                 </div>
                                             </div>
                                         </div>
@@ -67,15 +70,13 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane" id="update_account">
-                <p>User Account modification</p>
-            </div>
-            <div class="tab-pane" id="download">
-                <p>download</p>
-            </div>
-            <div class="tab-pane" id="config">
-                <p>config</p>
-            </div>
+
+{{--            <div class="tab-pane" id="download">--}}
+{{--                <p>download</p>--}}
+{{--            </div>--}}
+{{--            <div class="tab-pane" id="config">--}}
+{{--                <p>config</p>--}}
+{{--            </div>--}}
         </div>
     </div>
 

@@ -39,8 +39,11 @@ Route::post('orderplace',[ProductController::class,'orderPlace']);
 Route::get('myorders',[ProductController::class,'myOrders']);
 
 // admin
-Route::get('admin',[AdminController::class,'productsManageListPage']);
 Route::post('/admin',[AdminController::class,'addAccount']);
+Route::get('/admin/list',[AdminController::class,'UserAccountList']);
+Route::get('/admin/edit/{id}',[AdminController::class,'updateUserAccountPage']);
+Route::post('/admin/edit/{id}',[AdminController::class,'updateUserAccount']);
+Route::delete('/admin/{id}',[AdminController::class,'deleteUserAccount']);
 
 
 // Google 登入
