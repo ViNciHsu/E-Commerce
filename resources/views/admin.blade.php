@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+{{--            </div>--}}
 
 {{--            <div class="tab-pane" id="download">--}}
 {{--                <p>download</p>--}}

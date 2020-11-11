@@ -118,6 +118,5 @@
 {{--                <p>config</p>--}}
 {{--            </div>--}}
         </div>
-    </div>
 
 @endsection
