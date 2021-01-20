@@ -6,6 +6,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use phpDocumentor\Reflection\Types\Null_;
 use Session;
@@ -21,6 +22,8 @@ class ProductController extends Controller
         $data = DB::table('products')
 //            ->orderBy('id','desc')
             ->paginate(10);
+        // 回首頁時,清除顯示在search bar的條件
+        Session::forget('query');
         return view('product',['products' => $data]);
     }
 
@@ -40,11 +43,19 @@ class ProductController extends Controller
             // 增加模糊搜尋價格
             ->orwhere('price', 'like', '%'.$request->input('query').'%')
             ->get();
+
         // 印出 SQL 語法
 //        dd(DB::getQueryLog());
 //        dd($data);
+
+        // 用來將search.blade.php中的搜尋條件放到session中
+        // 使header.blade.php可以利用session的資料,在搜尋條顯示搜尋條件
+        $search = $request->input('query');
+        $request->session()->put('query',$search);
+//        dd($search);
         return view('search',[
-            'products' => $data
+            'products' => $data,
+//            'search' => $search, // 如果要在search.blade.php顯示才加
         ]);
     }
 
@@ -75,24 +86,45 @@ class ProductController extends Controller
         return Cart::where('user_id',$userId)->count();
     }
 
-    function cartList()
+    function cartList(Request $request)
     {
         $userId = Session::get('user')['id'];
 
-        $products = DB::table('cart')
+//        $products = DB::table('cart')
+//            ->join('products','cart.product_id','=','products.id')
+//            ->where('cart.user_id',$userId)
+//            // 加上 cart.id as cart_id 才能在 cartlist 中取得 cart.id 用來移除購物車商品
+//            ->select('products.*','cart.id as cart_id')
+//            ->get();
+
+        $cartlist_search = DB::table('cart')
             ->join('products','cart.product_id','=','products.id')
             ->where('cart.user_id',$userId)
-            // 加上 cart.id as cart_id 才能在 cartlist 中取得 cart.id 用來移除購物車商品
+            ->where('name', 'like', '%'.$request->input('cartlist_query').'%')
+            // 增加模糊搜尋價格
+//            ->orwhere('price', 'like', '%'.$request->input('cartlist_query').'%')
             ->select('products.*','cart.id as cart_id')
             ->get();
-//        dd($products);
-        return view('cartlist', ['products' => $products]);
+
+        // 存放到session內
+        $search = $request->input('cartlist_query');
+        $request->session()->put('cartlist_query',$search);
+//        dd($tmp);
+        return view('cartlist', [
+//            'products' => $products,
+            'cartlist_search' => $cartlist_search,
+        ]);
     }
 
     function removeCart($id)
     {
         Cart::destroy($id);
-        return redirect('cartlist');
+
+        // 從session中取出刪除前的搜尋條件
+        $old_cartlist_query = session()->all()['cartlist_query'];
+//        dd($old_cartlist_query);
+
+        return redirect('cartlist?cartlist_query=' . $old_cartlist_query);
     }
 
     function orderNow()

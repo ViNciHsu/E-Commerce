@@ -29,7 +29,10 @@ if(Session::has('user'))
             </ul>
             <form action="/search" class="navbar-form navbar-left">
                 <div class="form-group">
-                    <input name="query" type="text" class="form-control search-box" placeholder="Search">
+                    <input name="query" type="text" class="form-control search-box" placeholder="Search" value="{{ old('query' , Session::get('query') ) }}">
+                </div>
+                <div class="form-group">
+{{--                    <input type="text" name="query" value="{{ old(Session::get('query') , Session::get('query') ) }}" >--}}
                 </div>
                 <button type="submit" class="btn btn-outline-default"><i class="fa fa-search"></i>&nbsp;Search</button>
             </form>
