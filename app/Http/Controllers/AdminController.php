@@ -99,7 +99,7 @@ class AdminController extends Controller
     {
         $user = User::all()->find($id);
 //        $user = User::where('id', '!=', $id)->get();
-//        dd($users);
+//        dd($user);
 
         return view('adminEdit',[
             'user' => $user
@@ -141,6 +141,7 @@ class AdminController extends Controller
         }
         $user->name = $request->update_name;
         $user->email = $request->update_email;
+        $user->user_level = $request->update_user_level;
         $user->save();
 
         return redirect('admin/list')->with('status', 'Account updated successfully！');
@@ -152,5 +153,46 @@ class AdminController extends Controller
 //        dd($user);
         $user->delete();
         return redirect('admin/list')->with('status', 'Account deleted successfully！');
+    }
+
+    // admin 原頁修改帳號
+    public function updateUserAccountOriginPage(Request $request, $id)
+    {
+//        echo 'updateUserAccount~';exit;
+        $user = User::find($id);
+        $input = $request->input();
+//        dd($input);
+
+        // 驗證規則
+        $rules = [
+            //name
+            'origin_update_name' => [
+                'required',
+                'min:1',
+            ],
+            //email
+            'origin_update_email' => [
+                'required',
+                'max:150',
+                'email',
+            ],
+        ];
+
+        $validator = Validator::make($input, $rules);
+//        dd($validator);
+        if($validator->fails())
+        {
+            // 資料驗證錯誤
+            return redirect('admin/list')
+                ->with('error', 'Account updated failed！');
+//                ->withErrors($validator)
+//                ->withInput();
+        }
+        $user->name = $request->origin_update_name;
+        $user->email = $request->origin_update_email;
+        $user->user_level = $request->origin_update_user_level;
+        $user->save();
+
+        return redirect('admin/list')->with('status', 'Account updated successfully！');
     }
 }

@@ -38,9 +38,9 @@
                     </div>
                     <div class="form-group">
                         <label for="pwd">Payment Method</label><br><br>
-                        <input type="radio" name="payment" value="Online"><span>Online payment</span><br><br>
-                        <input type="radio" name="payment" value="EMI"><span>EMI payment</span><br><br>
-                        <input type="radio" name="payment" value="cash"><span>Payment on Delivery</span><br><br>
+                        <input type="radio" name="payment" value="Online"><span> Online payment</span><br><br>
+{{--                        <input type="radio" name="payment" value="EMI"><span> EMI payment</span><br><br>--}}
+{{--                        <input type="radio" name="payment" value="cash"><span> Payment on Delivery</span><br><br>--}}
                     </div>
                     <button type="submit" class="btn btn-default">Order Now</button>
                 </form>

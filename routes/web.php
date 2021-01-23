@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ExportPDFController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SocialiteController;
 /*
@@ -37,6 +38,10 @@ Route::get('removecart/{id}',[ProductController::class,'removeCart']);
 Route::get('ordernow',[ProductController::class,'orderNow']);
 Route::post('orderplace',[ProductController::class,'orderPlace']);
 Route::get('myorders',[ProductController::class,'myOrders']);
+// myorders export to PDF
+Route::get('myorders/export_to_pdf',[ExportPDFController::class,'ordersExportPDF']);
+// for myorders's PDF
+Route::get('myordersPDF',[ExportPDFController::class,'ordersPDF']);
 
 // admin
 Route::get('/admin/add',[AdminController::class,'addAccountListPage']);
@@ -45,6 +50,9 @@ Route::get('/admin/list',[AdminController::class,'UserAccountList']);
 Route::get('/admin/edit/{id}',[AdminController::class,'updateUserAccountPage']);
 Route::post('/admin/edit/{id}',[AdminController::class,'updateUserAccount']);
 Route::delete('/admin/{id}',[AdminController::class,'deleteUserAccount']);
+// original page to modify user account
+Route::get('/admin/{id}',[AdminController::class,'updateUserAccountOriginPage']);
+
 
 
 // Google 登入

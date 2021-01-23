@@ -46,6 +46,7 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+//            'root' => public_path('images/products'),
         ],
 
         'public' => [
@@ -80,6 +81,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+//        public_path('images/products') => storage_path('app/images/products'),
     ],
 
 ];

@@ -3,21 +3,26 @@
     <div class="custom-product">
         <div class="col-sm-10">
             <div class="trending-wrapper">
-                <h4>My Orders</h4>
+                <h2>My Orders</h2>
+                <div class="d-flex justify-content-end mb-4">
+                    <a class="btn btn-danger" href="{{ URL::to('myorders/export_to_pdf') }}">Export to PDF</a>
+                </div>
+                <br>
                 @foreach($orders as $item)
                     <div class="row searched-item cart-list-devider">
                         <div class="col-sm-3">
                             <a href="detail/{{ $item->id }}">
-                                <img class="trending-image" src="{{ $item->gallery }}">
+                                <img class="trending-image img-rounded img-responsive" src="{{ $item->gallery }}" alt="" width="120" height="50" >
                             </a>
                         </div>
                         <div class="col-sm-6">
                             <div class="">
-                                <h2>Name：{{ $item->name }}</h2>
-                                <h5>Delivery Status：{{ $item->status }}</h5>
-                                <h5>Address：{{ $item->address }}</h5>
-                                <h5>Payment Status：{{ $item->payment_status }}</h5>
-                                <h5>Payment Method：{{ $item->payment_method }}</h5>
+                                <p>Product Name：{{ $item->name }}</p>
+                                <p>Order Number：{{ $item->order_number }}</p>
+                                <p>Delivery Status：{{ $item->status }}</p>
+                                <p>Address：{{ $item->address }}</p>
+                                <p>Payment Status：{{ $item->payment_status }}</p>
+                                <p>Payment Method：{{ $item->payment_method }}</p>
                             </div>
                         </div>
                     </div>

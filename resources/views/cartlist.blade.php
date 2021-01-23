@@ -65,10 +65,9 @@ if(ProductController::cartItem()>0)
                             </div>
                         </div>
                     @endforeach
-{{--                @endif--}}
 
                 @if($cartItem == true)
-{{--                    <a class="btn btn-success" href="ordernow">Order Now</a>--}}
+                    <a class="btn btn-success" href="ordernow">Order Now</a>
                 @endif
                 <br><br>
             </div>

@@ -72,9 +72,13 @@
         </div>
         <div class="tab-pane" id="update_account">
             @if(session('status'))
-            <div class="alert alert-success">
-                <strong>{{ session('status') }}</strong>
-            </div>
+                <div class="alert alert-success">
+                    <strong>{{ session('status') }}</strong>
+                </div>
+            @elseif(session('error'))
+                <div class="alert alert-danger">
+                    <strong>{{ session('error') }}</strong>
+                </div>
             @endif
             <h3 class="card-title">User Account List</h3>
             @foreach($users as $user)
@@ -82,13 +86,25 @@
                     <table id="account_table" class="table table-bordered table-striped">
                         <tr>
                             <th width="15%">Name</th>
-                            <th width="30%">email</th>
+                            <th width="30%">E-mail</th>
+                            <th width="15%">User Level</th>
                             <th width="8%">Edit</th>
                             <th width="8%">Delete</th>
+                            <th width="8%">原頁修改</th>
                         </tr>
+
                         <tr>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>
+                                @if($user->user_level == 0)
+                                    初級會員 (0)
+                                @elseif($user->user_level == 1)
+                                    進階會員 (1)
+                                @elseif($user->user_level == 2)
+                                    高級會員 (2)
+                                @endif
+                            </td>
                             <td>
 {{--                                <form action="/admin/edit/{{ $user->id }}" method="post">--}}
 {{--                                    @csrf--}}
@@ -101,6 +117,21 @@
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/admin/{{ $user->id }}" method="post">
+                                    @csrf
+                                    @method('get')
+                                    <input type="text" value="{{ $user->name }}" name="origin_update_name">
+                                    <input type="text" value="{{ $user->email }}" name="origin_update_email">
+                                    <select class="form-control" name="origin_update_user_level" required>
+                                        <option value="0" {{ $user->user_level == 0 ? 'selected' : '' }}>初級會員 (0)</option>
+                                        <option value="1" {{ $user->user_level == 1 ? 'selected' : '' }}>進階會員 (1)</option>
+                                        <option value="2" {{ $user->user_level == 2 ? 'selected' : '' }}>高級會員 (2)</option>
+                                    </select>
+                                    <br>
+                                    <button type="submit" class="btn btn-info">原頁修改</button>
                                 </form>
                             </td>
                         </tr>

@@ -78,7 +78,8 @@
                         <table id="account_table" class="table table-bordered table-striped">
                             <tr>
                                 <th width="15%">Name</th>
-                                <th width="30%">email</th>
+                                <th width="30%">E-mail</th>
+                                <th width="10%">Level</th>
                                 <th width="8%">Edit</th>
 {{--                                <th width="8%">Delete</th>--}}
                             </tr>
@@ -90,6 +91,14 @@
                                     </td>
                                     <td>
                                         <input type="text" name="update_email" value="{{ $user->email }}">
+                                    </td>
+                                    <td>
+
+                                        <select class="form-control" name="update_user_level" required>
+                                                <option value="0" {{ $user->user_level == 0 ? 'selected' : '' }}>初級會員 (0)</option>
+                                                <option value="1" {{ $user->user_level == 1 ? 'selected' : '' }}>進階會員 (1)</option>
+                                                <option value="2" {{ $user->user_level == 2 ? 'selected' : '' }}>高級會員 (2)</option>
+                                        </select>
                                     </td>
                                     <td>
     {{--                                        @method('patch')--}}

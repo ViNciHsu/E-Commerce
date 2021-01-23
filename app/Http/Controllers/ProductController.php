@@ -12,6 +12,7 @@ use phpDocumentor\Reflection\Types\Null_;
 use Session;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -109,7 +110,13 @@ class ProductController extends Controller
         // 存放到session內
         $search = $request->input('cartlist_query');
         $request->session()->put('cartlist_query',$search);
-//        dd($tmp);
+//        dd(DB::table('cart')
+//            ->join('products','cart.product_id','=','products.id')
+//            ->where('cart.user_id',$userId)
+//            ->where('name', 'like', '%'.$request->input('cartlist_query').'%')
+//            // 增加模糊搜尋價格
+////            ->orwhere('price', 'like', '%'.$request->input('cartlist_query').'%')
+//            ->select('products.*','cart.id as cart_id')->toSql());
         return view('cartlist', [
 //            'products' => $products,
             'cartlist_search' => $cartlist_search,
@@ -143,8 +150,12 @@ class ProductController extends Controller
             // 加上 cart.id as cart_id 才能在 cartlist 中取得 cart.id 用來移除購物車商品
 
             ->sum('products.price');
-//        dd($total);
-        return view('ordernow', ['total' => $total]);
+//        $uuid = Str::uuid()->toString();
+//        dd($uuid);
+        return view('ordernow', [
+            'total' => $total,
+//            'uuid' => $uuid
+        ]);
     }
 
     // 用 post 執行 ordernow 的 submit
@@ -154,12 +165,18 @@ class ProductController extends Controller
         $allCart = Cart::where('user_id',$userId)->get();
 //        dd($allCart);
         $input = $request->input();
-        $rules = ['address' => 'required|min:5'];
+        $rules = [
+            'address' => 'required|min:5',
+            'payment' => 'required'
+        ];
 //        $messages = ['required' => '欄位不能空白，且字數必須超過5個字'];
         $validator = Validator::make($input, $rules);
+        $uuid = Str::uuid()->toString();
         if($validator->passes()) {
             foreach ($allCart as $cart) {
+//                dd($uuid);
                 $order = new Order;
+                $order->order_number = $uuid;
                 $order->product_id = $cart['product_id'];
                 $order->user_id = $cart['user_id'];
                 $order->status = "pending";
@@ -179,7 +196,6 @@ class ProductController extends Controller
 
     function myOrders()
     {
-
 //        $userId = Session::get('user')['id'];
         $userId = isset(Session::get('user')['id']) ? Session::get('user')['id'] : Null;
         if(isset($userId) && $userId != Null)
@@ -189,7 +205,8 @@ class ProductController extends Controller
                 ->where('orders.user_id', $userId)
                 // 加上 cart.id as cart_id 才能在 cartlist 中取得 cart.id 用來移除購物車商品
                 ->get();
-
+            view()->share('myorders', $orders);
+//dd($orders);
             return view('myorders', ['orders' => $orders]);
         }
         else

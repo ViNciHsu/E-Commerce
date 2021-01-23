@@ -69,7 +69,7 @@ return [
 
 //    'timezone' => 'UTC',
     'timezone' => 'Asia/Taipei',
-//    'locale' => 'zh-TW',
+    'locale' => 'zh-TW',
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+//    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -163,7 +163,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        // PDF
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -230,7 +231,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class, //laravel/socialite套件
+        //laravel/socialite套件
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        // PDF
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];
