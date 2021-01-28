@@ -165,6 +165,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         // PDF
         Barryvdh\DomPDF\ServiceProvider::class,
+        // Excel
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -235,6 +237,8 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         // PDF
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        // Excel
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

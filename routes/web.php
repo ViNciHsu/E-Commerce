@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ExportPDFController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SocialiteController;
 /*
@@ -42,6 +43,10 @@ Route::get('myorders',[ProductController::class,'myOrders']);
 Route::get('myorders/export_to_pdf',[ExportPDFController::class,'ordersExportPDF']);
 // for myorders's PDF
 Route::get('myordersPDF',[ExportPDFController::class,'ordersPDF']);
+// export Excel
+Route::get('myorders/export_to_excel',[ExcelController::class,'ordersExcel']);
+Route::get('myorders/test_page',[ExcelController::class,'callModel']);
+
 
 // admin
 Route::get('/admin/add',[AdminController::class,'addAccountListPage']);
