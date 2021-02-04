@@ -22,7 +22,7 @@ class ProductController extends Controller
 //        $data = Product::all();
         $data = DB::table('products')
 //            ->orderBy('id','desc')
-            ->paginate(10);
+            ->paginate(4);
         // 回首頁時,清除顯示在search bar的條件
         Session::forget('query');
         return view('product',['products' => $data]);

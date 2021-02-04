@@ -85,6 +85,7 @@
                 <div class="border-t border-gray-300 my-1 p-2">
                     <table id="account_table" class="table table-bordered table-striped">
                         <tr>
+                            <th width="5%">ID</th>
                             <th width="15%">Name</th>
                             <th width="30%">E-mail</th>
                             <th width="15%">User Level</th>
@@ -94,6 +95,7 @@
                         </tr>
 
                         <tr>
+                            <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
@@ -130,6 +132,23 @@
                                         <option value="1" {{ $user->user_level == 1 ? 'selected' : '' }}>進階會員 (1)</option>
                                         <option value="2" {{ $user->user_level == 2 ? 'selected' : '' }}>高級會員 (2)</option>
                                     </select>
+                                    <br>
+                                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                    <input type="checkbox"
+                                           id="authority_add_id"
+                                           name="authority_add_id"
+                                           @if($user->add == 1) checked @endif>
+                                    <label for="authority_add_id">新增</label><br/>
+                                    <input type="checkbox"
+                                           id="authority_edit_id"
+                                           name="authority_edit_id"
+                                           @if($user->edit == 1) checked @endif>
+                                    <label for="authority_edit_id">編輯</label><br/>
+                                    <input type="checkbox"
+                                           id="authority_delete_id"
+                                           name="authority_delete_id"
+                                           @if($user->delete == 1) checked @endif>
+                                    <label for="authority_delete_id">刪除</label>
                                     <br>
                                     <button type="submit" class="btn btn-info">原頁修改</button>
                                 </form>

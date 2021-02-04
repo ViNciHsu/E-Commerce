@@ -89,6 +89,7 @@ class AdminController extends Controller
         $users = User::OrderBy('updated_at', 'desc')
             ->where('email', '!=', 'admin@gmail.com')
             ->paginate(10);
+
         return view('adminList',[
             'users' => $users
         ]);
@@ -98,8 +99,6 @@ class AdminController extends Controller
     public function updateUserAccountPage($id)
     {
         $user = User::all()->find($id);
-//        $user = User::where('id', '!=', $id)->get();
-//        dd($user);
 
         return view('adminEdit',[
             'user' => $user
@@ -142,6 +141,11 @@ class AdminController extends Controller
         $user->name = $request->update_name;
         $user->email = $request->update_email;
         $user->user_level = $request->update_user_level;
+//        $user->user_id = $request->user_id;
+        $user->add = $request->authority_add_id ? 1 : 0;
+        $user->edit = $request->authority_edit_id ? 1 : 0;
+        $user->delete = $request->authority_delete_id ? 1 : 0;
+//        dd($user);
         $user->save();
 
         return redirect('admin/list')->with('status', 'Account updated successfully！');
@@ -191,6 +195,9 @@ class AdminController extends Controller
         $user->name = $request->origin_update_name;
         $user->email = $request->origin_update_email;
         $user->user_level = $request->origin_update_user_level;
+        $user->add = $request->authority_add_id ? 1 : 0;
+        $user->edit = $request->authority_edit_id ? 1 : 0;
+        $user->delete = $request->authority_delete_id ? 1 : 0;
         $user->save();
 
         return redirect('admin/list')->with('status', 'Account updated successfully！');

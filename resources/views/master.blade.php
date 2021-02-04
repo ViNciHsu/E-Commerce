@@ -80,5 +80,9 @@
         max-width:100%; /*不使用width:100% 是因避免圖片解析度不好，隨父元素被放大時會糊掉*/
         height:auto;
     }
+    .page{
+        margin: 5% 5% 2% 5%;
+
+    }
 </style>
 </html>
