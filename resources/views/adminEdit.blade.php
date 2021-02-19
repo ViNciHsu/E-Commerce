@@ -12,7 +12,7 @@
         {{--        </ul>--}}
         <div class="tab-content" style="padding:10px;">
             {{--            <div class="tab-pane active" id="add_account">--}}
-            <a href="/admin"><i class="fa fa-plus"></i> Add User Account</a>&nbsp;&nbsp;&nbsp;
+            <a href="/admin/add"><i class="fa fa-plus"></i> Add User Account</a>&nbsp;&nbsp;&nbsp;
             <a href="/admin/list"><i class="fa fa-edit"></i> User Account List</a>
             {{--                <div class="custom-product">--}}
             {{--                    <div class="container">--}}
@@ -99,7 +99,7 @@
                             </td>
                             <td>
 
-                                <select class="form-control" name="update_user_level" required>
+                                <select class="form-control" name="update_user_level" required id="update_user_level">
                                     <option value="0" {{ $user->user_level == 0 ? 'selected' : '' }}>初級會員 (0)</option>
                                     <option value="1" {{ $user->user_level == 1 ? 'selected' : '' }}>進階會員 (1)</option>
                                     <option value="2" {{ $user->user_level == 2 ? 'selected' : '' }}>高級會員 (2)</option>

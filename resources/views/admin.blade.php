@@ -11,8 +11,9 @@
 {{--        </ul>--}}
         <div class="tab-content" style="padding:10px;">
 {{--            <div class="tab-pane active" id="add_account">--}}
-                <a href="/admin"><i class="fa fa-plus"></i> Add User Account</a>&nbsp;&nbsp;&nbsp;
-                <a href="/admin/list"><i class="fa fa-edit"></i> User Account List</a>
+            <a href="/admin/add"><i class="fa fa-plus"></i> Add User Account</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/admin/list"><i class="fa fa-edit"></i> User Account List</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/admin/account_search"><i class="fa fa-search"></i> User Account Search</a>
                 <div class="custom-product">
                     <div class="container">
                         <div class="row">

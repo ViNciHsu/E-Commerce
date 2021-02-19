@@ -11,8 +11,9 @@
         {{--        </ul>--}}
         <div class="tab-content" style="padding:10px;">
             {{--            <div class="tab-pane active" id="add_account">--}}
-            <a href="/admin/add"><i class="fa fa-plus"></i> Add User Account</a>&nbsp;&nbsp;&nbsp;
-            <a href="/admin/list"><i class="fa fa-edit"></i> User Account List</a>
+            <a href="/admin/add"><i class="fa fa-plus"></i> Add User Account</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/admin/list"><i class="fa fa-edit"></i> User Account List</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/admin/account_search"><i class="fa fa-search"></i> User Account Search</a>
             {{--                <div class="custom-product">--}}
             {{--                    <div class="container">--}}
             {{--                        <div class="row">--}}
@@ -108,11 +109,7 @@
                                 @endif
                             </td>
                             <td>
-{{--                                <form action="/admin/edit/{{ $user->id }}" method="post">--}}
-{{--                                    @csrf--}}
-{{--                                    @method('get')--}}
-                                    <a href="/admin/edit/{{ $user->id }}" type="submit" class="btn btn-warning">Edit</a>
-{{--                                </form>--}}
+                                <a href="/admin/edit/{{ $user->id }}" type="submit" class="btn btn-warning">Edit</a>
                             </td>
                             <td>
                                 <form action="/admin/{{ $user->id }}" method="post">
@@ -124,10 +121,10 @@
                             <td>
                                 <form action="/admin/{{ $user->id }}" method="post">
                                     @csrf
-                                    @method('get')
+{{--                                    @method('get')--}}
                                     <input type="text" value="{{ $user->name }}" name="origin_update_name">
                                     <input type="text" value="{{ $user->email }}" name="origin_update_email">
-                                    <select class="form-control" name="origin_update_user_level" required>
+                                    <select class="form-control" name="origin_update_user_level" required id="origin_update_user_level">
                                         <option value="0" {{ $user->user_level == 0 ? 'selected' : '' }}>初級會員 (0)</option>
                                         <option value="1" {{ $user->user_level == 1 ? 'selected' : '' }}>進階會員 (1)</option>
                                         <option value="2" {{ $user->user_level == 2 ? 'selected' : '' }}>高級會員 (2)</option>

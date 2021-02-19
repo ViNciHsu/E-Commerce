@@ -56,7 +56,12 @@ Route::get('/admin/edit/{id}',[AdminController::class,'updateUserAccountPage']);
 Route::post('/admin/edit/{id}',[AdminController::class,'updateUserAccount']);
 Route::delete('/admin/{id}',[AdminController::class,'deleteUserAccount']);
 // original page to modify user account
-Route::get('/admin/{id}',[AdminController::class,'updateUserAccountOriginPage']);
+Route::post('/admin/{id}',[AdminController::class,'updateUserAccountOriginPage']);
+// try
+Route::get('/admin/account_search',[AdminController::class,'searchAccount']);
+//Route::post('/admin/account_search_ajax',[AdminController::class,'searchAccountAjax']);
+
+Route::get('/admin/account_search/{select_id}',[AdminController::class,'jsonData']);
 
 
 

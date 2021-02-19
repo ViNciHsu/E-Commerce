@@ -6,6 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>E-Commerce Project</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -23,7 +24,16 @@
     <!-- use-font-awesome-icons-in-laravel -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
-    <script>
+    <!-- select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+{{--    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+        });
+    </script>
+    <script type="text/javascript">
         // var uri = window.location.href.split(/\?|#/)[0];
         // // var uri = window.location.pathname;
         // alert(uri);
@@ -32,6 +42,70 @@
         // var hash = window.location.hash;
         // alert(hash);
         // Returns #hash
+        function clean_select_data(){
+            // 清除下拉選單顯示的<input>資料
+            for (i = 0; i < 10; i++) {
+                $("input[name='description["+i+"]']").val('');
+                // $("input[name='description[]']").remove();
+            }
+        }
+
+        $(document).ready(function (){
+            $('#update_user_level').select2();
+            $('#origin_update_user_level').select2();
+            $('#search_user_level').select2();
+
+            $('#search_user_level').on("select2:select",function (e){
+                var obj_data = $(this).val();
+                // alert(obj_data);
+                $.ajax({
+                   type:'GET',
+                   url:'{{ url('admin/account_search') }}/'+ obj_data,
+                    success: function (data) {
+                        var ln = data.length;
+                        alert(data.length + '筆資料');
+                        for (i = 0; i < ln; i++) {
+                            $("input[name='description["+i+"]']").val(data[i].name);
+                            $("input[name='description["+(i+1)+"]']").append( '<input type="text" id="description0" name="description['+(i+1)+']">').val(data[(i+1)].name);
+                        }
+                       // alert('成功');
+                    },
+                    error: function (xhr, status, error){
+                       console.log(xhr);
+                    }
+                });
+            });
+        });
+
+{{--        $(document).on('change', '#search_user_level', function(e){--}}
+{{--        // $("#search_user_level").click(function(e){--}}
+{{--            e.preventDefault();--}}
+{{--            var search_user_level = $('#search_user_level :selected').val();//注意:selected前面有個空格！--}}
+{{--            alert('search_user_level: '+ search_user_level);--}}
+{{--            $.ajax({--}}
+{{--                headers: {--}}
+{{--                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+{{--                },--}}
+{{--                url: "{{ url('admin/account_search') }}",--}}
+{{--                url: "{{ url('/admin/account_search_ajax') }}",--}}
+{{--                method: "GET",--}}
+{{--                dataType: "json",--}}
+{{--                data: {--}}
+{{--                    --}}{{--_token: '<?php echo csrf_token()?>',--}}
+{{--                    // search_query傳到Controller--}}
+{{--                    search_user_level: search_user_level--}}
+{{--                },--}}
+{{--                success: function (data) {--}}
+{{--                    console.log(data.status);--}}
+{{--                    alert($tmp);--}}
+{{--                },--}}
+{{--                error: function (xhr, type) {--}}
+{{--                    alert('Ajax error!');--}}
+{{--                    // alert(xhr,type);--}}
+{{--                }--}}
+{{--            })//end ajax--}}
+{{--            });--}}
+        // }
     </script>
 </head>
 <body>

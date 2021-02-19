@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -202,4 +204,61 @@ class AdminController extends Controller
 
         return redirect('admin/list')->with('status', 'Account updated successfully！');
     }
+
+    public function searchAccount()
+    {
+        $users = User::all();
+        $temp = [];
+        foreach($users as $k => $v){
+            $temp[] = $v->user_level;
+            $counts = array_count_values($temp);
+        }
+        $max_count_user_level = array_keys($counts, max($counts));
+//        dd($max_count_user_level);
+        // 使用jsonData()撈到的ajax資料,引數目前放user_level數出來最多的index
+        $users_ajax = $this->jsonData($max_count_user_level[0]);
+//        dd($users_ajax);
+        return view('adminAccountSearch',[
+            'users' => $users,
+            'users_ajax' => $users_ajax
+        ]);
+    }
+
+    public function searchAccountAjax(Request $request)
+    {
+        $tmp = $request->search_user_level;
+        return '11111111111';
+//        $query = $request->search_query;
+//        $tmp = $request->ajax();
+//        dd($query);
+//        echo '請求成功了';exit;
+        //取回data
+//        $data = $request->input('search_user_level');
+
+        //取得所有data
+//        $allData = $request->all();
+//        dd($allData);
+//        $results = User::all()->get();
+        //取得多個table data
+//        $results = DB::table('users')
+//            ->select('id', 'name', 'email', 'user_level')
+//            ->where('user_level', "=", $query)->get();
+//        dd($results); //text
+
+        //傳回到前端
+//        return $results; //json
+//        return response()->json($results);
+    }
+
+    public function jsonData($select_id = null)
+    {
+        $users = DB::table('users')
+            ->select('id', 'name', 'email', 'user_level')
+            ->where('email', '!=', 'admin@gmail.com')
+            ->where('user_level', "=", $select_id)
+            ->get();
+//        dd($users);
+        return $users;
+    }
+
 }
