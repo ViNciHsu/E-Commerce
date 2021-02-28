@@ -54,58 +54,164 @@
             $('#update_user_level').select2();
             $('#origin_update_user_level').select2();
             $('#search_user_level').select2();
+            $('#user_ajax_result').select2();
+            $('#address_county').select2();
+            $('#address_city').select2();
+            $('#update_address_county').select2();
+            $('#update_address_city').select2();
+
 
             $('#search_user_level').on("select2:select",function (e){
                 var obj_data = $(this).val();
                 // alert(obj_data);
+                if(obj_data != 99){
                 $.ajax({
                    type:'GET',
                    url:'{{ url('admin/account_search') }}/'+ obj_data,
                     success: function (data) {
                         var ln = data.length;
-                        alert(data.length + '筆資料');
+                        var show_str = "<option value='noData'>---請選擇會員名字---</option>";
+                        // alert(data.length + '筆資料');
                         for (i = 0; i < ln; i++) {
-                            $("input[name='description["+i+"]']").val(data[i].name);
-                            $("input[name='description["+(i+1)+"]']").append( '<input type="text" id="description0" name="description['+(i+1)+']">').val(data[(i+1)].name);
+                            // $("input[name='description["+i+"]']").val(data[i].name);
+                            show_str += "<option value="+data[i].name+">"+data[i].name+"</option>";
+                            // textarea
+                            // if(show_str != '') show_str += '\r\n';
+                            // show_str += data[i].name;
                         }
+                        // textarea
+                        // $('#textarea0').val(show_str);
+                        // 第二階下拉選單
+                        $("#user_ajax_result").empty();
+                        $("#user_ajax_result").append(show_str);
+                        $("#user_ajax_result").attr("disabled",false);
+                        $("#user_ajax_email").val('');
                        // alert('成功');
                     },
                     error: function (xhr, status, error){
                        console.log(xhr);
                     }
                 });
+                }else{
+                    $("#user_ajax_email").val('');
+                    $("#user_ajax_result").empty();
+                    $("#user_ajax_result").attr("disabled",true);
+                }
+            });
+
+            // 第二層下拉選單
+            $('#user_ajax_result').on("select2:select",function (e){
+                var obj_data2 = $(this).val();
+                // alert(obj_data);
+                if(obj_data2 != 'noData') {
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{ url('admin/account_search') }}/second/' + obj_data2,
+                        success: function (data) {
+                            var ln = data.length;
+                            // var show_str = "<option value=''>---請選擇會員名字---</option>";
+                            // alert(data.length + '筆資料');
+                            for (i = 0; i < ln; i++) {
+                                // $("input[name='description["+i+"]']").val(data[i].name);
+
+                                    $("#user_ajax_email").val(data[i].email);
+
+                                // textarea
+                                // if(show_str != '') show_str += '\r\n';
+                                // show_str += data[i].email;
+                            }
+                            // textarea
+                            // $('#user_ajax_result_textarea').val(show_str);
+                            // 第二階下拉選單
+                            // $("#user_ajax_result").empty();
+                            // $("#user_ajax_result").append(show_str);
+                            // alert('成功');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr);
+                        }
+                    });
+                }else{
+                    $("#user_ajax_email").val('');
+                    // alert('請選擇會員名字');
+                }
+            });
+
+            // 根據全台縣市連動帶出第二層鄉鎮市區下拉選單
+            $('#address_county').on("select2:select",function (e){
+
+                var obj_data_county = $(this).val();
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{ url('admin/add') }}/' + obj_data_county,
+                        success: function (data) {
+                            var show_str = "<option value=''>-----</option>";
+                            // alert(data.length + '筆資料');
+                            for (var i = 0; i < data.length; i++) {
+                                // alert(data[i].address_zip);
+                                show_str += "<option value=" + data[i].city+ ">" + data[i].city + "</option>";
+                            }
+                            $("#address_city").empty();
+                            $("#address_city").append(show_str);
+                        },
+                        error: function (xhr, status, error) {
+                            alert('縣市失敗');
+                            console.log(xhr);
+                        }
+                    });
+            });
+
+            // 根據所選鄉鎮市區撈郵遞區號
+            $('#address_city').on("select2:select",function (e){
+
+                var obj_data_city = $(this).val(); // city value
+                var obj_data_county = $('#address_county').val();
+                // alert(obj_data_county);
+                // alert(obj_data_city);
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ url('admin/add') }}/' + obj_data_county + '/' + obj_data_city,
+                    success: function (data) {
+                        // alert(data.length + '筆鄉鎮市區資料');
+                        // for (var i = 0; i < data.length; i++) {
+                        //     alert(data[0].address_zip);
+                        // }
+                        $("#address_zip").val(data[0].address_zip);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('鄉鎮市區失敗');
+                        console.log(xhr);
+                    }
+                });
+            });
+
+            // 編輯頁所用 根據全台縣市連動帶出第二層鄉鎮市區下拉選單
+            $('#update_address_county').on("select2:select",function (e){
+
+                var obj_data_county = $(this).val();
+                var update_id = $('#update_id').val();
+                // alert(update_id);
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ url('admin/edit') }}/' + update_id + '/' + obj_data_county,
+                    success: function (data) {
+                        var show_str = "<option value=''>-----</option>";
+                        // alert(data.length + '筆資料');
+                        for (var i = 0; i < data.length; i++) {
+                            // alert(data[i].address_zip);
+                            show_str += "<option value=" + data[i].city+ ">" + data[i].city + "</option>";
+                        }
+                        $("#update_address_city").empty();
+                        $("#update_address_city").append(show_str);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('編輯頁縣市失敗');
+                        console.log(xhr);
+                    }
+                });
             });
         });
 
-{{--        $(document).on('change', '#search_user_level', function(e){--}}
-{{--        // $("#search_user_level").click(function(e){--}}
-{{--            e.preventDefault();--}}
-{{--            var search_user_level = $('#search_user_level :selected').val();//注意:selected前面有個空格！--}}
-{{--            alert('search_user_level: '+ search_user_level);--}}
-{{--            $.ajax({--}}
-{{--                headers: {--}}
-{{--                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
-{{--                },--}}
-{{--                url: "{{ url('admin/account_search') }}",--}}
-{{--                url: "{{ url('/admin/account_search_ajax') }}",--}}
-{{--                method: "GET",--}}
-{{--                dataType: "json",--}}
-{{--                data: {--}}
-{{--                    --}}{{--_token: '<?php echo csrf_token()?>',--}}
-{{--                    // search_query傳到Controller--}}
-{{--                    search_user_level: search_user_level--}}
-{{--                },--}}
-{{--                success: function (data) {--}}
-{{--                    console.log(data.status);--}}
-{{--                    alert($tmp);--}}
-{{--                },--}}
-{{--                error: function (xhr, type) {--}}
-{{--                    alert('Ajax error!');--}}
-{{--                    // alert(xhr,type);--}}
-{{--                }--}}
-{{--            })//end ajax--}}
-{{--            });--}}
-        // }
     </script>
 </head>
 <body>

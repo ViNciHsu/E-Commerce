@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -79,6 +80,10 @@ class AdminController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->address_zip = $request->address_zip;
+        $user->address_county = $request->address_county;
+        $user->address_city = $request->address_city;
+        $user->address_street = $request->address_street;
         $user->save();
 //        dd($user);
         $success = true;
@@ -102,8 +107,36 @@ class AdminController extends Controller
     {
         $user = User::all()->find($id);
 
+        $address_countys = Address::select('county')->groupBy('county')->orderBy('county')->get();
+        foreach ($address_countys as $v){
+            $allAddresses[] = $v->county;
+        }
+        foreach ($allAddresses as $key2 => $v2_county){
+            $tmp_address_citys[] = Address::select('city', 'county', 'address_zip')
+                ->where('county','=',$v2_county)
+                ->groupBy('city', 'county')
+                ->orderBy('county')->orderBy('city')->get();
+        }
+        foreach ($tmp_address_citys as $key3 => $v3_data){
+            foreach ($v3_data as $v4_data_details) {
+//                $address_citys[] = $v4_data_details->city;
+//                $address_zips[] = $v4_data_details->address_zip;
+                $address_all[] = $v4_data_details;
+            }
+        }
+//        $address_zip_all = Address::select('address_zip')->orderBy('address_zip')->get();
+//        echo '<pre>';
+//        var_dump($address_citys);
+//        echo '</pre>';
+
+//        dd($address_all);
         return view('adminEdit',[
-            'user' => $user
+            'user' => $user,
+//            'allAddresses' => $allAddresses,
+            'address_countys' => $address_countys,
+//            'address_citys' => $address_citys,
+//            'address_zips' => $address_zips,
+            'address_all' => $address_all,
         ]);
     }
 
@@ -143,6 +176,9 @@ class AdminController extends Controller
         $user->name = $request->update_name;
         $user->email = $request->update_email;
         $user->user_level = $request->update_user_level;
+        $user->address_county = $request->update_address_county;
+        $user->address_city = $request->update_address_city;
+
 //        $user->user_id = $request->user_id;
         $user->add = $request->authority_add_id ? 1 : 0;
         $user->edit = $request->authority_edit_id ? 1 : 0;
@@ -220,34 +256,8 @@ class AdminController extends Controller
 //        dd($users_ajax);
         return view('adminAccountSearch',[
             'users' => $users,
-            'users_ajax' => $users_ajax
+            'users_ajax' => $users_ajax,
         ]);
-    }
-
-    public function searchAccountAjax(Request $request)
-    {
-        $tmp = $request->search_user_level;
-        return '11111111111';
-//        $query = $request->search_query;
-//        $tmp = $request->ajax();
-//        dd($query);
-//        echo '請求成功了';exit;
-        //取回data
-//        $data = $request->input('search_user_level');
-
-        //取得所有data
-//        $allData = $request->all();
-//        dd($allData);
-//        $results = User::all()->get();
-        //取得多個table data
-//        $results = DB::table('users')
-//            ->select('id', 'name', 'email', 'user_level')
-//            ->where('user_level', "=", $query)->get();
-//        dd($results); //text
-
-        //傳回到前端
-//        return $results; //json
-//        return response()->json($results);
     }
 
     public function jsonData($select_id = null)
@@ -257,8 +267,23 @@ class AdminController extends Controller
             ->where('email', '!=', 'admin@gmail.com')
             ->where('user_level', "=", $select_id)
             ->get();
+//        dd($select_id);
+        if($select_id != 99) {
+            return $users;
+        }else{
+            return 'noData';
+        }
+    }
+
+    public function jsonDataSecond($user_name)
+    {
+        $userData = DB::table('users')
+            ->select('id', 'name', 'email', 'user_level')
+            ->where('email', '!=', 'admin@gmail.com')
+            ->where('name', "=", $user_name)
+            ->get();
 //        dd($users);
-        return $users;
+        return $userData;
     }
 
 }

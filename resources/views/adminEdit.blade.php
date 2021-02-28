@@ -78,9 +78,11 @@
                 <table id="account_table" class="table table-bordered table-striped">
                     <tr>
                         <th width="2%">ID</th>
-                        <th width="10%">Name</th>
-                        <th width="20%">E-mail</th>
+                        <th width="8%">Name</th>
+                        <th width="10%">E-mail</th>
                         <th width="15%">User Level</th>
+                        <th width="15%">Address County</th>
+                        <th width="15%">Address City</th>
                         <th width="10%">Authority</th>
                         <th width="8%">Edit</th>
                         {{--                                <th width="8%">Delete</th>--}}
@@ -89,10 +91,10 @@
                         <form action="/admin/edit/{{ $user->id }}" method="post">
                             @csrf
                             <td>
-                                <input type="text" name="update_id" value="{{ $user->id }}" disabled>
+                                <input type="text" name="update_id" value="{{ $user->id }}" disabled id="update_id" size="3">
                             </td>
                             <td>
-                                <input type="text" name="update_name" value="{{ $user->name }}">
+                                <input type="text" name="update_name" value="{{ $user->name }}" size="8">
                             </td>
                             <td>
                                 <input type="text" name="update_email" value="{{ $user->email }}">
@@ -104,6 +106,29 @@
                                     <option value="1" {{ $user->user_level == 1 ? 'selected' : '' }}>進階會員 (1)</option>
                                     <option value="2" {{ $user->user_level == 2 ? 'selected' : '' }}>高級會員 (2)</option>
                                 </select>
+                            </td>
+
+                            <td>
+                                <select class="form-control" name="update_address_county" required id="update_address_county">
+                                    <option value="">-----</option>
+                                    @foreach($address_countys as $key => $address)
+                                        <option value="{{ $address->county }}" {{ $user->address_county == $address->county ? 'selected' : '' }}>{{ $address->county }}</option>
+                                    @endforeach
+
+                                </select>
+                            </td>
+
+                            <td>
+                                <select class="form-control" name="update_address_city" required id="update_address_city">
+                                    <option value="">-----</option>
+                                    @foreach($address_all as $key => $address)
+                                        @if($user->address_county == $address->county)
+                                        <option value="{{ $address->city }}" {{ $user->address_city == $address->city ? 'selected' : '' }}>{{ $address->city }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </td>
+
                             <td>
 {{--                                <input type="hidden" name="user_id" value="{{ $user->id }}">--}}
 {{--                                <input type="checkbox"--}}

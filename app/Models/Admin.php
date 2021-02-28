@@ -21,6 +21,10 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'address_zip',
+        'address_county',
+        'address_city',
+        'address_street',
     ];
 
     /**

@@ -24,14 +24,22 @@
                 <h4>Account Level :</h4>
                     <input type="hidden" name="_token" value="'.csrf_token().'">
                     <select class="form-control" name="search_user_level" required id="search_user_level" onchange="clean_select_data()">
-                    <option value="0">初級會員 (0) search</option>
-                    <option value="1">進階會員 (1) search</option>
-                    <option value="2">高級會員 (2) search</option>
-                </select>
-                    <input type="text" id="description" name="description">以下要呈現資料下拉選單的AJAX資料 (符合該會員等級的名字)<br>
+                        <option value="99">---請選擇會員等級---</option>
+                        <option value="0">初級會員 (0) search</option>
+                        <option value="1">進階會員 (1) search</option>
+                        <option value="2">高級會員 (2) search</option>
+                    </select>
+{{--                    <input type="text" id="description" name="description">--}}
+                    以下要呈現資料下拉選單的AJAX資料 (符合該會員等級的名字)<br>
                     @foreach($users_ajax as $key => $user_ajax)
-                    <input type="text" id="description0" name="description[{{$key}}]"><br>
+{{--                    <input type="text" id="description0" name="description[{{$key}}]"><br>--}}
                     @endforeach
+                    <br><br>
+                    <select class="form-control"  name="user_ajax_result" id="user_ajax_result" disabled></select>
+                    <br><br>
+                    User-Email: <input type="text" id="user_ajax_email" name="user_ajax_email">
+{{--                    <textarea id="user_ajax_result_textarea" name="user_ajax_result_textarea" cols="50" rows="5"></textarea>--}}
+                        <br>
                 </div>
                 <br><br>
             @foreach($users as $user)

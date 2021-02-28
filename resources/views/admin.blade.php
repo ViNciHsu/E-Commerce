@@ -53,11 +53,51 @@
                                             </div>
                                             <input type="text" class="form-control" placeholder="Password" title="密碼" name="password">
                                         </div>
+
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                            </div>
+{{--                                            <input type="text" class="form-control" placeholder="Address County" title="縣市" name="address_county" id="address_county">--}}
+                                            全台縣市
+                                            <select class="form-control" name="address_county" id="address_county">
+                                                <option value="">-----</option>
+                                                @foreach($address_countys as $key => $address_county)
+                                                <option value="{{ $address_county->county }}">{{ $address_county->county }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                            </div>
+{{--                                            <input type="text" class="form-control" placeholder="Address City" title="鄉鎮市區" name="address_city">--}}
+                                            鄉鎮市區
+                                            <select class="form-control" name="address_city" id="address_city">
+                                                <option value="">-----</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                            </div>
+                                            郵遞區號
+                                            <input type="text" class="form-control" placeholder="Zip" title="郵遞區號" name="address_zip" id="address_zip">
+                                        </div>
+
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Address Street" title="街道" name="address_street" size="50">
+                                        </div>
                                         <br>
                                         <div class="input-group">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <input type="submit" value="Add" class="btn btn-primary">
+                                                    <input type="submit" value="Add User" class="btn btn-primary">
                                                 </div>
                                                 <div class="col-md-6">
 {{--                                                    <input type="reset" value="Clear" class="btn btn-danger" style="width: 100%">--}}

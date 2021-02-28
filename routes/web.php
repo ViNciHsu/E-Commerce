@@ -7,6 +7,7 @@ use App\Http\Controllers\ExportPDFController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\AddressController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,8 +62,16 @@ Route::post('/admin/{id}',[AdminController::class,'updateUserAccountOriginPage']
 Route::get('/admin/account_search',[AdminController::class,'searchAccount']);
 //Route::post('/admin/account_search_ajax',[AdminController::class,'searchAccountAjax']);
 
+// Ajax
 Route::get('/admin/account_search/{select_id}',[AdminController::class,'jsonData']);
+Route::get('/admin/account_search/second/{select_id}',[AdminController::class,'jsonDataSecond']);
 
+// address
+Route::get('/admin/add',[AddressController::class,'index']);
+Route::get('/admin/add/{county}',[AddressController::class,'jsonDataCity']);
+Route::get('/admin/add/{county}/{city}',[AddressController::class,'jsonDataZip']);
+// 編輯頁 下拉選單縣市連棟鄉鎮市區
+Route::get('/admin/edit/{id}/{county}',[AddressController::class,'jsonDataEditCity']);
 
 
 // Google 登入
