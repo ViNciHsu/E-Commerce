@@ -37,84 +37,50 @@
                     <br><br>
                     <select class="form-control"  name="user_ajax_result" id="user_ajax_result" disabled></select>
                     <br><br>
-                    User-Email: <input type="text" id="user_ajax_email" name="user_ajax_email">
+
+                    <div class="border-t border-gray-300 my-1 p-2">
+                        <table id="account_table" class="table table-bordered table-striped">
+                    <tr>
+                        <th width="5%">ID</th>
+                        <th width="8%">Name</th>
+                        <th width="10%">E-mail</th>
+                        <th width="10%">Address County</th>
+                        <th width="10%">Address City</th>
+                        <th width="10%">Address Zip</th>
+                        <th width="10%">Address Street</th>
+                    </tr>
+
+                        <tr>
+                            <td>
+                                <input type="text" id="user_ajax_id" name="user_ajax_id" readonly size="2">
+                            </td>
+                            <td>
+                                <input type="text" id="user_ajax_name" name="user_ajax_name" readonly size="10">
+                            </td>
+                            <td>
+                                <input type="text" id="user_ajax_email" name="user_ajax_email" readonly size="10">
+                            </td>
+                            <td>
+                                <input type="text" id="user_ajax_county" name="user_ajax_county" readonly size="4">
+                            </td>
+                            <td>
+                                <input type="text" id="user_ajax_city" name="user_ajax_city" readonly size="4">
+                            </td>
+                            <td>
+                                <input type="text" id="user_ajax_zip" name="user_ajax_zip" readonly size="2">
+                            </td>
+                            <td>
+                                <input type="text" id="user_ajax_street" name="user_ajax_street" readonly size="15">
+                            </td>
+                        </tr>
+                        </table>
+                    </div>
+{{--                    User-Email: <input type="text" id="user_ajax_email" name="user_ajax_email">--}}
 {{--                    <textarea id="user_ajax_result_textarea" name="user_ajax_result_textarea" cols="50" rows="5"></textarea>--}}
                         <br>
                 </div>
-                <br><br>
-            @foreach($users as $user)
-                <div class="border-t border-gray-300 my-1 p-2">
-                    <table id="account_table" class="table table-bordered table-striped">
-                        <tr>
-                            <th width="5%">ID</th>
-                            <th width="15%">Name</th>
-                            <th width="30%">E-mail</th>
-                            <th width="15%">User Level</th>
-                            <th width="8%">Edit</th>
-                            <th width="8%">Delete</th>
-                            <th width="8%">原頁修改</th>
-                        </tr>
+                <br><br><br><br><br><br>
 
-                        <tr>
-                            <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>
-                                @if($user->user_level == 0)
-                                    初級會員 (0)
-                                @elseif($user->user_level == 1)
-                                    進階會員 (1)
-                                @elseif($user->user_level == 2)
-                                    高級會員 (2)
-                                @endif
-                            </td>
-                            <td>
-                                <a href="/admin/edit/{{ $user->id }}" type="submit" class="btn btn-warning">Edit</a>
-                            </td>
-                            <td>
-                                <form action="/admin/{{ $user->id }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                            <td>
-                                <form action="/admin/{{ $user->id }}" method="post">
-                                    @csrf
-                                    {{--                                    @method('get')--}}
-                                    <input type="text" value="{{ $user->name }}" name="origin_update_name">
-                                    <input type="text" value="{{ $user->email }}" name="origin_update_email">
-                                    <select class="form-control" name="origin_update_user_level" required>
-                                        <option value="0" {{ $user->user_level == 0 ? 'selected' : '' }}>初級會員 (0)</option>
-                                        <option value="1" {{ $user->user_level == 1 ? 'selected' : '' }}>進階會員 (1)</option>
-                                        <option value="2" {{ $user->user_level == 2 ? 'selected' : '' }}>高級會員 (2)</option>
-                                    </select>
-                                    <br>
-                                    <input type="hidden" name="user_id" value="{{ $user->id }}">
-
-                                    <input type="checkbox"
-                                           id="authority_add_id"
-                                           name="authority_add_id"
-                                           @if($user->add == 1) checked @endif>
-                                    <label for="authority_add_id">新增</label><br/>
-                                    <input type="checkbox"
-                                           id="authority_edit_id"
-                                           name="authority_edit_id"
-                                           @if($user->edit == 1) checked @endif>
-                                    <label for="authority_edit_id">編輯</label><br/>
-                                    <input type="checkbox"
-                                           id="authority_delete_id"
-                                           name="authority_delete_id"
-                                           @if($user->delete == 1) checked @endif>
-                                    <label for="authority_delete_id">刪除</label>
-                                    <br>
-                                    <button type="submit" class="btn btn-info">原頁修改</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            @endforeach
             {{--                {{ $users->links() }}--}}
         </div>
         {{--        <div class="tab-pane" id="download">--}}

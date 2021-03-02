@@ -109,13 +109,19 @@
                         url: '{{ url('admin/account_search') }}/second/' + obj_data2,
                         success: function (data) {
                             var ln = data.length;
-                            // var show_str = "<option value=''>---請選擇會員名字---</option>";
+                            // var show_str = "<option value=''>-----</option>";
                             // alert(data.length + '筆資料');
                             for (i = 0; i < ln; i++) {
-                                // $("input[name='description["+i+"]']").val(data[i].name);
-
-                                    $("#user_ajax_email").val(data[i].email);
-
+                                // show_str += "<option value="+data[i].user_level +">"+ data[i].user_level +"</option>";
+console.log(data[i]);
+                                $("#user_ajax_id").val(data[i].id);
+                                $("#user_ajax_name").val(data[i].name);
+                                $("#user_ajax_email").val(data[i].email);
+                                $("#user_ajax_level").val(data[i].user_level);
+                                $("#user_ajax_county").val(data[i].address_county);
+                                $("#user_ajax_city").val(data[i].address_city);
+                                $("#user_ajax_zip").val(data[i].address_zip);
+                                $("#user_ajax_street").val(data[i].address_street);
                                 // textarea
                                 // if(show_str != '') show_str += '\r\n';
                                 // show_str += data[i].email;
@@ -124,7 +130,7 @@
                             // $('#user_ajax_result_textarea').val(show_str);
                             // 第二階下拉選單
                             // $("#user_ajax_result").empty();
-                            // $("#user_ajax_result").append(show_str);
+                            // $("#user_ajax_user_level").append(show_str);
                             // alert('成功');
                         },
                         error: function (xhr, status, error) {

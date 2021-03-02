@@ -280,21 +280,30 @@ class AdminController extends Controller
     public function searchAccount()
     {
         $users = User::all();
+
         $temp = [];
         foreach($users as $k => $v){
             $temp[] = $v->user_level;
+            $user = $v;
             $counts = array_count_values($temp);
         }
         $max_count_user_level = array_keys($counts, max($counts));
 //        dd($max_count_user_level);
         // 使用jsonData()撈到的ajax資料,引數目前放user_level數出來最多的index
         $users_ajax = $this->jsonData($max_count_user_level[0]);
-//        dd($users_ajax);
+
+        $address_countys = Address::select('county')->groupBy('county')->orderBy('county')->get();
+
+        $address_citys = Address::select('city')->groupBy('city')->orderBy('city')->get();
+//        dd($user);
 
         if(session()->has('user_id')) {
             return view('adminAccountSearch',[
                 'users' => $users,
                 'users_ajax' => $users_ajax,
+                'address_countys' => $address_countys,
+                'address_citys' => $address_citys,
+
             ]);
         }else{
             return redirect('/login');
@@ -304,7 +313,7 @@ class AdminController extends Controller
     public function jsonData($select_id = null)
     {
         $users = DB::table('users')
-            ->select('id', 'name', 'email', 'user_level')
+            ->select('id', 'name', 'email', 'user_level', 'address_county', 'address_city', 'address_zip', 'address_street')
             ->where('email', '!=', 'admin@gmail.com')
             ->where('user_level', "=", $select_id)
             ->get();
@@ -319,7 +328,7 @@ class AdminController extends Controller
     public function jsonDataSecond($user_name)
     {
         $userData = DB::table('users')
-            ->select('id', 'name', 'email', 'user_level')
+            ->select('id', 'name', 'email', 'user_level', 'address_county', 'address_city', 'address_zip', 'address_street')
             ->where('email', '!=', 'admin@gmail.com')
             ->where('name', "=", $user_name)
             ->get();
