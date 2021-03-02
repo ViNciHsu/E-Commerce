@@ -74,7 +74,7 @@
                         // alert(data.length + '筆資料');
                         for (i = 0; i < ln; i++) {
                             // $("input[name='description["+i+"]']").val(data[i].name);
-                            show_str += "<option value="+data[i].name+">"+data[i].name+"</option>";
+                            show_str += "<option value="+data[i].name +">"+ data[i].name +"</option>";
                             // textarea
                             // if(show_str != '') show_str += '\r\n';
                             // show_str += data[i].name;
@@ -149,9 +149,10 @@
                             // alert(data.length + '筆資料');
                             for (var i = 0; i < data.length; i++) {
                                 // alert(data[i].address_zip);
-                                show_str += "<option value=" + data[i].city+ ">" + data[i].city + "</option>";
+                                show_str += "<option value=" + data[i].city + ">" + data[i].city + "</option>";
                             }
                             $("#address_city").empty();
+                            $("#address_zip").val('');
                             $("#address_city").append(show_str);
                         },
                         error: function (xhr, status, error) {
@@ -199,13 +200,39 @@
                         // alert(data.length + '筆資料');
                         for (var i = 0; i < data.length; i++) {
                             // alert(data[i].address_zip);
-                            show_str += "<option value=" + data[i].city+ ">" + data[i].city + "</option>";
+                            show_str += "<option value=" + data[i].city + ">" + data[i].city + "</option>";
                         }
                         $("#update_address_city").empty();
+                        $("#update_address_zip").val('');
                         $("#update_address_city").append(show_str);
                     },
                     error: function (xhr, status, error) {
-                        alert('編輯頁縣市失敗');
+                        // alert('編輯頁縣市失敗');
+                        console.log(xhr);
+                    }
+                });
+            });
+
+            // 編輯頁:根據所選鄉鎮市區撈郵遞區號
+            $('#update_address_city').on("select2:select",function (e){
+
+                var obj_data_county = $('#update_address_county').val();
+                var obj_data_city = $(this).val();
+                var update_id = $('#update_id').val();
+                // alert(obj_data_county);
+                // alert(obj_data_city);
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ url('admin/edit') }}/' + update_id + '/' + obj_data_county + '/' + obj_data_city,
+                    success: function (data) {
+                        // alert(data.length + '筆鄉鎮市區資料');
+                        // for (var i = 0; i < data.length; i++) {
+                        //     alert(data[0].address_zip);
+                        // }
+                        $("#update_address_zip").val(data[0].address_zip);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('鄉鎮市區失敗');
                         console.log(xhr);
                     }
                 });

@@ -72,6 +72,7 @@ Route::get('/admin/add/{county}',[AddressController::class,'jsonDataCity']);
 Route::get('/admin/add/{county}/{city}',[AddressController::class,'jsonDataZip']);
 // 編輯頁 下拉選單縣市連棟鄉鎮市區
 Route::get('/admin/edit/{id}/{county}',[AddressController::class,'jsonDataEditCity']);
+Route::get('/admin/edit/{id}/{county}/{city}',[AddressController::class,'jsonDataEditZip']);
 
 
 // Google 登入

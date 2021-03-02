@@ -131,12 +131,28 @@ class AddressController extends Controller
         return $addresses;
     }
 
-    // 編輯頁用的Ajax
+    // 編輯頁 根據縣市抓鄉鎮市區用的Ajax
     public function jsonDataEditCity($id, $county = null)
     {
         $addresses = DB::table('addresses')
             ->select('address_zip', 'county', 'city', 'street')
             ->where('county', "=", $county)
+            ->get();
+        $cityData = [];
+        foreach ($addresses as $v){
+            $cityData[] = $v->city;
+        }
+//        dd($addresses);
+        return $addresses;
+    }
+
+    // 編輯頁 根據鄉鎮市區所選帶出郵遞區號用的Ajax
+    public function jsonDataEditZip($id, $county = null, $city = null)
+    {
+        $addresses = DB::table('addresses')
+            ->select('address_zip', 'county', 'city', 'street')
+            ->where('county', "=", $county)
+            ->where('city', "=", $city)
             ->get();
         $cityData = [];
         foreach ($addresses as $v){

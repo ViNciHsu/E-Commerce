@@ -77,12 +77,13 @@
             <div class="border-t border-gray-300 my-1 p-2">
                 <table id="account_table" class="table table-bordered table-striped">
                     <tr>
-                        <th width="2%">ID</th>
+                        <th width="1%">ID</th>
                         <th width="8%">Name</th>
                         <th width="10%">E-mail</th>
                         <th width="15%">User Level</th>
                         <th width="15%">Address County</th>
                         <th width="15%">Address City</th>
+                        <th width="5%">Address Zip</th>
                         <th width="10%">Authority</th>
                         <th width="8%">Edit</th>
                         {{--                                <th width="8%">Delete</th>--}}
@@ -91,10 +92,10 @@
                         <form action="/admin/edit/{{ $user->id }}" method="post">
                             @csrf
                             <td>
-                                <input type="text" name="update_id" value="{{ $user->id }}" disabled id="update_id" size="3">
+                                <input type="text" name="update_id" value="{{ $user->id }}" disabled id="update_id" size="1">
                             </td>
                             <td>
-                                <input type="text" name="update_name" value="{{ $user->name }}" size="8">
+                                <input type="text" name="update_name" value="{{ $user->name }}" size="7">
                             </td>
                             <td>
                                 <input type="text" name="update_email" value="{{ $user->email }}">
@@ -121,12 +122,19 @@
                             <td>
                                 <select class="form-control" name="update_address_city" required id="update_address_city">
                                     <option value="">-----</option>
-                                    @foreach($address_all as $key => $address)
-                                        @if($user->address_county == $address->county)
-                                        <option value="{{ $address->city }}" {{ $user->address_city == $address->city ? 'selected' : '' }}>{{ $address->city }}</option>
-                                        @endif
+{{--                                    @foreach($address_all as $key => $address)--}}
+{{--                                        @if($user->address_county == $address->county)--}}
+{{--                                        <option value="{{ $address->city }}" {{ $user->address_city == $address->city ? 'selected' : '' }}>{{ $address->city }}</option>--}}
+{{--                                        @endif--}}
+{{--                                    @endforeach--}}
+                                    @foreach($address_citys as $key => $address_city)
+                                        <option value="{{ $address_city->city }}" {{ $user->address_city == $address_city->city ? "selected" : "" }}>{{ $address_city->city }}</option>
                                     @endforeach
                                 </select>
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" name="update_address_zip" id="update_address_zip" value="{{ $user->address_zip }}" size="2" readonly>
                             </td>
 
                             <td>

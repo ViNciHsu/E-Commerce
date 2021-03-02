@@ -108,15 +108,18 @@ class AdminController extends Controller
         $user = User::all()->find($id);
 
         $address_countys = Address::select('county')->groupBy('county')->orderBy('county')->get();
+
         foreach ($address_countys as $v){
             $allAddresses[] = $v->county;
         }
+
         foreach ($allAddresses as $key2 => $v2_county){
             $tmp_address_citys[] = Address::select('city', 'county', 'address_zip')
                 ->where('county','=',$v2_county)
                 ->groupBy('city', 'county')
                 ->orderBy('county')->orderBy('city')->get();
         }
+
         foreach ($tmp_address_citys as $key3 => $v3_data){
             foreach ($v3_data as $v4_data_details) {
 //                $address_citys[] = $v4_data_details->city;
@@ -124,17 +127,22 @@ class AdminController extends Controller
                 $address_all[] = $v4_data_details;
             }
         }
-//        $address_zip_all = Address::select('address_zip')->orderBy('address_zip')->get();
+        $address_citys = Address::select('county','city')
+            ->where('county','=',$user->address_county)
+            ->groupBy('county','city')
+            ->orderBy('county')
+            ->orderBy('city')
+            ->get();
 //        echo '<pre>';
 //        var_dump($address_citys);
 //        echo '</pre>';
-
+//        dd($address_citys);
 //        dd($address_all);
         return view('adminEdit',[
             'user' => $user,
 //            'allAddresses' => $allAddresses,
             'address_countys' => $address_countys,
-//            'address_citys' => $address_citys,
+            'address_citys' => $address_citys,
 //            'address_zips' => $address_zips,
             'address_all' => $address_all,
         ]);
@@ -178,6 +186,7 @@ class AdminController extends Controller
         $user->user_level = $request->update_user_level;
         $user->address_county = $request->update_address_county;
         $user->address_city = $request->update_address_city;
+        $user->address_zip = $request->update_address_zip;
 
 //        $user->user_id = $request->user_id;
         $user->add = $request->authority_add_id ? 1 : 0;

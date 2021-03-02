@@ -84,7 +84,7 @@
                                                 <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
                                             </div>
                                             郵遞區號
-                                            <input type="text" class="form-control" placeholder="Zip" title="郵遞區號" name="address_zip" id="address_zip">
+                                            <input type="text" class="form-control" placeholder="Zip" title="郵遞區號" name="address_zip" id="address_zip" readonly>
                                         </div>
 
                                         <div class="input-group mb-4">
