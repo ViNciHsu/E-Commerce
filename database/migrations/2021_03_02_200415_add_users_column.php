@@ -15,13 +15,13 @@ class AddUsersColumn extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('user_level')
-                ->default(0);
+                ->default(0)->nullable();
             $table->integer('add')
-                ->default(0);
+                ->default(0)->nullable();
             $table->integer('edit')
-                ->default(0);
+                ->default(0)->nullable();
             $table->integer('delete')
-                ->default(0);
+                ->default(0)->nullable();
             $table->string('address_county')->nullable();
             $table->string('address_city')->nullable();
             $table->string('address_zip')->nullable();
