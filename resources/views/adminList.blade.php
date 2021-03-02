@@ -1,5 +1,10 @@
 @extends('master')
 @section('content')
+    @if(session()->has('user_id'))
+
+    @else
+
+    @endif
     <div class="container">
 {{--        <h2>adminList.blade.php</h2>--}}
 

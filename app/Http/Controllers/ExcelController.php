@@ -28,9 +28,9 @@ class ExcelController extends Controller
         $temp = [];
         $temp[] = (object) ['0' => '發票組', '1' => 'AQ'];
         $temp[] = (object) ['0' => '發票號碼', '1' => 'AQ'];
-        $temp[] = (object) ['0' => '發票時間', '1' => '2021-01-26 16:21:30'];
+        $temp[] = (object) ['0' => '發票時間', '1' => '2021-03-03 11:21:30'];
         $temp[] = (object) ['0' => '是否使用', '1' => '是'];
-        $temp[] = (object) ['0' => '是否作廢', '1' => '否', '2' => '作廢日期', '3' => '2021-01-27 15:53:42'];
+        $temp[] = (object) ['0' => '是否作廢', '1' => '否', '2' => '作廢日期', '3' => '2021-03-03 12:53:42'];
         $temp[] = (object) ['0' => '地址', '1' => ''];
         $temp[] = (object) ['0' => '電話', '1' => ''];
         $temp[] = (object) ['0' => '店家統編', '1' => ''];
@@ -99,7 +99,7 @@ class ExcelController extends Controller
             'A1:A13' => 'center',
             'C5' => 'center',
             'A15:K15' => 'center',
-            'A16:A19' => 'center',
+            'A16:A'. $countOrders => 'center',
             'C16:C'. $countOrders => 'center',
             'E16:G'. $countOrders => 'center',
             'B1:B13' => 'right',
@@ -143,7 +143,7 @@ class ExcelController extends Controller
             'A1:A13' => 13,
             'C5' => 13,
             'A15:K15' => 13,
-            'A16:A19' => 13
+            'A16:A'. $countOrders => 13
         ]);
 //        dd($excel);
         return Excel::download($excel, $timeNow.'_orders.xlsx');

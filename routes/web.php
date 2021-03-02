@@ -25,6 +25,7 @@ Route::get('/login', function () {
 
 Route::get('/logout', function () {
     Session::forget('user');
+    Session::forget('user_id');
     return redirect('login');
 });
 

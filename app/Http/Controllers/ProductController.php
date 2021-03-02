@@ -89,8 +89,9 @@ class ProductController extends Controller
 
     function cartList(Request $request)
     {
-        $userId = Session::get('user')['id'];
-
+//        $userId = Session::get('user')['id'];
+        $userId = session()->get('user_id') ? session()->get('user_id') : null;
+//        dd(session()->get('user_id'));
 //        $products = DB::table('cart')
 //            ->join('products','cart.product_id','=','products.id')
 //            ->where('cart.user_id',$userId)
@@ -117,10 +118,14 @@ class ProductController extends Controller
 //            // 增加模糊搜尋價格
 ////            ->orwhere('price', 'like', '%'.$request->input('cartlist_query').'%')
 //            ->select('products.*','cart.id as cart_id')->toSql());
-        return view('cartlist', [
+        if(session()->has('user_id')) {
+            return view('cartlist', [
 //            'products' => $products,
-            'cartlist_search' => $cartlist_search,
-        ]);
+                'cartlist_search' => $cartlist_search,
+            ]);
+        }else{
+            return redirect('/login');
+        }
     }
 
     function removeCart($id)
@@ -211,7 +216,7 @@ class ProductController extends Controller
         }
         else
         {
-            return redirect('/');
+            return redirect('/login');
         }
     }
 }

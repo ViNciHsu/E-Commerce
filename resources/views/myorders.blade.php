@@ -5,9 +5,9 @@
             <div class="trending-wrapper">
                 <h2>My Orders</h2>
                 <div class="d-flex justify-content-end mb-4 cart-list-devider">
-                    <a class="btn btn-danger" href="{{ URL::to('myorders/export_to_pdf') }}">Export to PDF</a>
-                    &nbsp;&nbsp;&nbsp;
                     <a class="btn btn-success" href="{{ URL::to('myorders/export_to_excel') }}">Export to Excel</a>
+
+{{--                    <a class="btn btn-danger" href="{{ URL::to('myorders/export_to_pdf') }}">Export to PDF</a>--}}
 
 {{--                    <a class="btn btn-info" href="{{ URL::to('myorders/test_page') }}">test_page to Excel</a>--}}
                 </div>

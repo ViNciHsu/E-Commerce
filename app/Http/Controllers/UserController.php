@@ -30,6 +30,7 @@ class UserController extends Controller
         else
         {
             $request->session()->put('user',$user);
+            session()->put('user_id',$user->id);
             return redirect('/');
         }
 

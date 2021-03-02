@@ -20,9 +20,13 @@ class AdminController extends Controller
             ->paginate(10);
 
 //        dd($users);
-        return view('admin',[
-            'users' => $users
-        ]);
+        if(session()->has('user_id')) {
+            return view('admin',[
+                'users' => $users
+            ]);
+        }else{
+            return redirect('/login');
+        }
     }
 
     public function addAccount(Request $request)
@@ -97,9 +101,15 @@ class AdminController extends Controller
             ->where('email', '!=', 'admin@gmail.com')
             ->paginate(10);
 
-        return view('adminList',[
-            'users' => $users
-        ]);
+//        dd(session()->has('user_id'));
+        if(session()->has('user_id')) {
+            return view('adminList', [
+                'users' => $users
+            ]);
+        }else{
+            return redirect('/login');
+        }
+
     }
 
     // admin edit list
@@ -138,14 +148,19 @@ class AdminController extends Controller
 //        echo '</pre>';
 //        dd($address_citys);
 //        dd($address_all);
-        return view('adminEdit',[
-            'user' => $user,
+
+        if(session()->has('user_id')) {
+            return view('adminEdit',[
+                'user' => $user,
 //            'allAddresses' => $allAddresses,
-            'address_countys' => $address_countys,
-            'address_citys' => $address_citys,
+                'address_countys' => $address_countys,
+                'address_citys' => $address_citys,
 //            'address_zips' => $address_zips,
-            'address_all' => $address_all,
-        ]);
+                'address_all' => $address_all,
+            ]);
+        }else{
+            return redirect('/login');
+        }
     }
 
     // admin 修改帳號
@@ -263,10 +278,15 @@ class AdminController extends Controller
         // 使用jsonData()撈到的ajax資料,引數目前放user_level數出來最多的index
         $users_ajax = $this->jsonData($max_count_user_level[0]);
 //        dd($users_ajax);
-        return view('adminAccountSearch',[
-            'users' => $users,
-            'users_ajax' => $users_ajax,
-        ]);
+
+        if(session()->has('user_id')) {
+            return view('adminAccountSearch',[
+                'users' => $users,
+                'users_ajax' => $users_ajax,
+            ]);
+        }else{
+            return redirect('/login');
+        }
     }
 
     public function jsonData($select_id = null)
