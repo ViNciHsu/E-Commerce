@@ -33,5 +33,6 @@ class AddGoogleIdToUsersTable extends Migration
             // 移除欄位
             $table->dropColumn('google_id');
         });
+
     }
 }
