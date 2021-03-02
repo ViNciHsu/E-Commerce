@@ -22,10 +22,10 @@ class AddUsersColumn extends Migration
                 ->default(0);
             $table->integer('delete')
                 ->default(0);
-            $table->string('address_county');
-            $table->string('address_city');
-            $table->string('address_zip');
-            $table->string('address_street');
+            $table->string('address_county')->nullable();
+            $table->string('address_city')->nullable();
+            $table->string('address_zip')->nullable();
+            $table->string('address_street')->nullable();
         });
     }
 
