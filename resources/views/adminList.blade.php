@@ -95,7 +95,7 @@
                             <th width="15%">Name</th>
                             <th width="30%">E-mail</th>
                             <th width="15%">User Level</th>
-                            <th width="8%">Edit</th>
+{{--                            <th width="8%">Edit</th>--}}
                             <th width="8%">Delete</th>
                             <th width="8%">原頁修改</th>
                         </tr>
@@ -113,9 +113,9 @@
                                     高級會員 (2)
                                 @endif
                             </td>
-                            <td>
-                                <a href="/admin/edit/{{ $user->id }}" type="submit" class="btn btn-warning">Edit</a>
-                            </td>
+{{--                            <td>--}}
+{{--                                <a href="/admin/edit/{{ $user->id }}" type="submit" class="btn btn-warning">Edit</a>--}}
+{{--                            </td>--}}
                             <td>
                                 <form action="/admin/{{ $user->id }}" method="post">
                                     @csrf

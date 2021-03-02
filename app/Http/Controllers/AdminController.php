@@ -103,12 +103,17 @@ class AdminController extends Controller
     {
         $users = User::OrderBy('updated_at', 'desc')
             ->where('email', '!=', 'admin@gmail.com')
-            ->paginate(10);
+            ->paginate(100);
+
+        $address_countys = Address::select('county')->groupBy('county')->orderBy('county')->get();
+        $address_citys = Address::select('city')->groupBy('city')->orderBy('city')->get();
 
 //        dd(session()->has('user_id'));
         if(session()->has('user_id')) {
             return view('adminList', [
-                'users' => $users
+                'users' => $users,
+                'address_countys' => $address_countys,
+                'address_citys' => $address_citys,
             ]);
         }else{
             return redirect('/login');
@@ -264,6 +269,9 @@ class AdminController extends Controller
         $user->add = $request->authority_add_id ? 1 : 0;
         $user->edit = $request->authority_edit_id ? 1 : 0;
         $user->delete = $request->authority_delete_id ? 1 : 0;
+        $user->address_county = $request->update_address_county;
+        $user->address_city = $request->update_address_city;
+        $user->address_zip = $request->update_address_zip;
         $user->save();
 
         return redirect('admin/list')->with('status', 'Account updated successfully！');
