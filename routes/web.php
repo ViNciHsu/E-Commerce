@@ -53,7 +53,7 @@ Route::get('myorders/test_page',[ExcelController::class,'callModel']);
 // admin
 Route::get('/admin/add',[AdminController::class,'addAccountListPage']);
 Route::post('/admin/add',[AdminController::class,'addAccount']);
-Route::get('/admin/list',[AdminController::class,'UserAccountList']);
+Route::get('/admin/list',[AdminController::class,'userAccountList']);
 Route::get('/admin/edit/{id}',[AdminController::class,'updateUserAccountPage']);
 Route::post('/admin/edit/{id}',[AdminController::class,'updateUserAccount']);
 Route::delete('/admin/{id}',[AdminController::class,'deleteUserAccount']);
@@ -68,7 +68,7 @@ Route::get('/admin/account_search/{select_id}',[AdminController::class,'jsonData
 Route::get('/admin/account_search/second/{select_id}',[AdminController::class,'jsonDataSecond']);
 
 // address
-Route::get('/admin/add',[AddressController::class,'index']);
+//Route::get('/admin/add',[AddressController::class,'index']);
 Route::get('/admin/add/{county}',[AddressController::class,'jsonDataCity']);
 Route::get('/admin/add/{county}/{city}',[AddressController::class,'jsonDataZip']);
 // 編輯頁 下拉選單縣市連棟鄉鎮市區

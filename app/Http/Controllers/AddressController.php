@@ -17,20 +17,15 @@ class AddressController extends Controller
     {
         $address_countys = Address::select('county')->groupBy('county')->orderBy('county')->get();
         $address_citys = Address::select('city')->groupBy('city')->orderBy('city')->get();
-        $addresses = DB::table('addresses')
-            ->select('address_zip', 'county', 'city', 'street')
-            ->where('county', "=", '台中市')
-            ->where('city', "=", '東區')
-            ->get();
-        $zipData = [];
-        foreach ($addresses as $v){
-            $zipData[] = $v->address_zip;
-        }
 
-        return view('admin',[
-            'address_countys' => $address_countys,
-            'address_citys' => $address_citys,
-        ]);
+        if(session()->has('user_id')) {
+            return view('admin',[
+                'address_countys' => $address_countys,
+                'address_citys' => $address_citys,
+            ]);
+        }else{
+            return redirect('/login');
+        }
     }
 
     /**

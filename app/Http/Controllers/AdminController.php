@@ -12,17 +12,21 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
-    //
-    public function addAccountListPage ()
+    public function addAccountListPage()
     {
         $users = User::OrderBy('updated_at', 'desc')
-            ->where('email', '!=', 'admin@gmail.com')
-            ->paginate(10);
+            ->where('email', '!=', 'admin@gmail.com');
 
+        $address_countys = Address::select('county')->groupBy('county')->orderBy('county')->get();
+
+        $address_citys = Address::select('city')->groupBy('city')->orderBy('city')->get();
 //        dd($users);
+
         if(session()->has('user_id')) {
             return view('admin',[
-                'users' => $users
+                'users' => $users,
+                'address_countys' => $address_countys,
+                'address_citys' => $address_citys,
             ]);
         }else{
             return redirect('/login');
@@ -95,7 +99,7 @@ class AdminController extends Controller
 
     }
 
-    public function UserAccountList()
+    public function userAccountList()
     {
         $users = User::OrderBy('updated_at', 'desc')
             ->where('email', '!=', 'admin@gmail.com')
