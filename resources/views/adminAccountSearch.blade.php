@@ -6,7 +6,8 @@
             {{--            <div class="tab-pane active" id="add_account">--}}
             <a href="/admin/add"><i class="fa fa-plus"></i> Add User Account</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="/admin/list"><i class="fa fa-edit"></i> User Account List</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="/admin/account_search"><i class="fa fa-search"></i> User Account Search</a>
+            <a href="/admin/account_search"><i class="fa fa-search"></i> User Account Search</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/admin/add_mutil_account"><i class="fa fa-user-plus"></i> Add  Mutilple User Account</a>
 
         </div>
         <div class="tab-pane" id="update_account">
@@ -75,6 +76,16 @@
                         </tr>
                         </table>
                     </div>
+                    <br><br>
+
+                        <!-- 行,列增加/刪除 -->
+{{--                    <div>--}}
+{{--                        <input type="button" value="新增一行" onclick="addRow()"/>--}}
+{{--                        <input type="button" value="刪除一行" onclick="delRow()"/>--}}
+{{--                        <input type="button" value="新增一列" onclick="addCol()"/>--}}
+{{--                        <input type="button" value="刪除一列" onclick="delCol()"/>--}}
+{{--                    </div>--}}
+
 {{--                    User-Email: <input type="text" id="user_ajax_email" name="user_ajax_email">--}}
 {{--                    <textarea id="user_ajax_result_textarea" name="user_ajax_result_textarea" cols="50" rows="5"></textarea>--}}
                         <br>

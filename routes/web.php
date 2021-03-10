@@ -51,6 +51,10 @@ Route::get('myorders/test_page',[ExcelController::class,'callModel']);
 
 
 // admin
+// add Mutilple Account
+Route::get('/admin/add_mutil_account', [AdminController::class,'addMutilpleAccountPage']);
+Route::post('/admin/add_mutil_account', [AdminController::class,'addMutilpleAccount']);
+
 Route::get('/admin/add',[AdminController::class,'addAccountListPage']);
 Route::post('/admin/add',[AdminController::class,'addAccount']);
 Route::get('/admin/list',[AdminController::class,'userAccountList']);
@@ -59,9 +63,9 @@ Route::post('/admin/edit/{id}',[AdminController::class,'updateUserAccount']);
 Route::delete('/admin/{id}',[AdminController::class,'deleteUserAccount']);
 // original page to modify user account
 Route::post('/admin/{id}',[AdminController::class,'updateUserAccountOriginPage']);
+
 // try
 Route::get('/admin/account_search',[AdminController::class,'searchAccount']);
-//Route::post('/admin/account_search_ajax',[AdminController::class,'searchAccountAjax']);
 
 // Ajax
 Route::get('/admin/account_search/{select_id}',[AdminController::class,'jsonData']);
@@ -74,6 +78,7 @@ Route::get('/admin/add/{county}/{city}',[AddressController::class,'jsonDataZip']
 // 編輯頁 下拉選單縣市連棟鄉鎮市區
 Route::get('/admin/edit/{id}/{county}',[AddressController::class,'jsonDataEditCity']);
 Route::get('/admin/edit/{id}/{county}/{city}',[AddressController::class,'jsonDataEditZip']);
+
 
 
 // Google 登入

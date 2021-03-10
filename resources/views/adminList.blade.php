@@ -18,7 +18,8 @@
             {{--            <div class="tab-pane active" id="add_account">--}}
             <a href="/admin/add"><i class="fa fa-plus"></i> Add User Account</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="/admin/list"><i class="fa fa-edit"></i> User Account List</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="/admin/account_search"><i class="fa fa-search"></i> User Account Search</a>
+            <a href="/admin/account_search"><i class="fa fa-search"></i> User Account Search</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/admin/add_mutil_account"><i class="fa fa-user-plus"></i> Add  Mutilple User Account</a>
             {{--                <div class="custom-product">--}}
             {{--                    <div class="container">--}}
             {{--                        <div class="row">--}}

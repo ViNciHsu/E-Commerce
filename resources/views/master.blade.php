@@ -50,6 +50,62 @@
             }
         }
 
+        // 新增一列
+        function addCol(){
+            $col = $("<td class='tdSet'><input type='text' /></td>");
+            $("#tbody tr").append($col);
+        }
+
+        // 刪除一列
+        function delCol(){
+            alert($("#tbody tr").eq(0).find("td").length);
+            if(  $("#tbody tr").eq(0).find("td").length <= 2 ){
+                return;
+            }
+            alert($("#tbody tr").length);
+            $("#tbody tr td:last-child").remove();
+        }
+
+        // 新增一行
+        var i = 0;
+        function addRow(obj){
+            i ++;
+            R = tbl.insertRow()
+            C = R.insertCell()
+            C.innerHTML = "第"+i+"個"
+            // C = R.insertCell()
+            C.innerHTML += "<input type='hidden' id='admin_mutil_id-"+i+"' name='admin_mutil_id-"+i+"' value='"+i+"'>"
+            C = R.insertCell()
+            C.innerHTML = "<input type='text' id='name_row_"+i+"' name='name_row[]'>"
+            // C.innerHTML = "<input type='text' id='name_row_"+i+"' name='name_row_"+i+"'>"
+            C = R.insertCell()
+            C.innerHTML = "<input type='text' id='email_row_"+i+"' name='email_row[]'>"
+            // C.innerHTML = "<input type='text' id='email_row_"+i+"' name='email_row_"+i+"'>"
+            C = R.insertCell()
+            C.innerHTML = "<input type='button' id='btn_add_row_"+i+"' value='新增一行' onclick='addRow(this)'>"
+            C = R.insertCell()
+            C.innerHTML = "<input type='button' id='btn_del_row_"+i+"' value='刪除一行' onclick='delRow(this)'>"
+            console.log(obj.parentElement.parentElement.rowIndex);
+            $('#add_row_0').attr('id','add_row_'+i);
+            $('#del_row_0').attr('id','del_row_'+i);
+            $('#btn_add_row_0').attr('id','btn_add_row_'+i);
+            $('#btn_del_row_0').attr('id','btn_del_row_'+i);
+        }
+
+        // 刪除一行
+        function delRow(obj){
+            if($("#tbody tr").length <= 1){
+                return;
+            }
+            // alert(obj.parentElement.parentElement.rowIndex);
+            // obj如果是<td>,parentElement就是<tr>,
+            // parentElement.parentElement就是<table>
+            // 所以整串就是table.rowIndex,得到在<table>的哪一行
+            tbl.deleteRow(obj.parentElement.parentElement.rowIndex);
+        }
+
+
+
         $(document).ready(function (){
             $('#update_user_level').select2();
             $('#origin_update_user_level').select2();

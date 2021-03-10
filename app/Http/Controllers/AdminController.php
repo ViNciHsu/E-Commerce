@@ -280,7 +280,7 @@ class AdminController extends Controller
     public function searchAccount()
     {
         $users = User::all();
-
+//        dd($users);
         $temp = [];
         foreach($users as $k => $v){
             $temp[] = $v->user_level;
@@ -334,6 +334,82 @@ class AdminController extends Controller
             ->get();
 //        dd($users);
         return $userData;
+    }
+
+    function addMutilpleAccountPage()
+    {
+//        dd(session()->has('user_id'));
+        if(session()->has('user_id')) {
+            return view('adminMutilAdd',[
+//                'users' => $users,
+//                'address_countys' => $address_countys,
+//                'address_citys' => $address_citys,
+            ]);
+        }else{
+            return redirect('/login');
+        }
+    }
+
+    function addMutilpleAccount(Request $request)
+    {
+//        dd(session()->has('user_id'));
+        $input = $request->input();
+        $name_row = $request->input('name_row');
+        $email_row = $request->input('email_row');
+
+        for($i = 0; $i < count($name_row); $i++) {
+            $user = new User;
+            $user->name = $name_row[$i];
+            $user->email = $email_row[$i];
+            $user->save();
+        }
+
+        return redirect('/admin/add_mutil_account');
+        // 驗證規則
+//        $rules = [
+//            //name
+//            'name' => [
+//                'required',
+//                'min:1',
+//            ],
+//            //email
+//            'email' => [
+//                'required',
+//                'max:150',
+//                'email',
+//            ],
+//            //密碼
+//            'password' => [
+//                'required',
+//                'min:5',
+//            ],
+//        ];
+//        $error_message = [
+//            'msg' => [
+//                'This E-mail has already been registered,
+//                 please try a new one！',
+//            ],
+//        ];
+//
+//        //驗證資料
+//        $validator = Validator::make($input, $rules);
+////        dd($validator);
+//        if($validator->fails())
+//        {
+//            //資料驗證錯誤
+//            return redirect('admin/account_search')
+//                ->withErrors($validator)
+//                ->withInput();
+//        }
+//
+//        $userEmail = User::where(['email'=>$request->email])->first();
+//
+//        if($userEmail)
+//        {
+//            return redirect('admin/account_search')
+//                ->withErrors($error_message)
+//                ->withInput();
+//        }
     }
 
 }

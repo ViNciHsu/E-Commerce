@@ -20,8 +20,8 @@ class SocialiteController extends Controller
 //                'https://www.googleapis.com/auth/userinfo.email',
 //                'https://www.googleapis.com/auth/plus.me'])
 //            ->with(
-//                ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
-//                ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'],
+//                ['client_id' => ''],
+//                ['client_secret' => ''],
 //                ['redirect' => 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback'])
 ////            ->redirectUrl($redirect_url)
 //            ->redirect();
@@ -32,8 +32,8 @@ class SocialiteController extends Controller
                 'https://www.googleapis.com/auth/userinfo.email',
                 'https://www.googleapis.com/auth/plus.me'])
             ->with(
-                ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
-                ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'])
+                ['client_id' => ''],
+                ['client_secret' => ''])
 //                ['redirect' => '/google-sign-in-callback'])
 //            ->redirectUrl($redirect_url)
             ->redirect();
@@ -51,8 +51,8 @@ class SocialiteController extends Controller
                     'https://www.googleapis.com/auth/userinfo.email',
                     'https://www.googleapis.com/auth/plus.me'])
                 ->with(
-                    ['client_id' => '453343820007-7ve95p6p0ivglhn4atav31kop17vnp6j.apps.googleusercontent.com'],
-                    ['client_secret' => 'qpQKmqk828Q4qA8naaMUqfmS'])
+                    ['client_id' => ''],
+                    ['client_secret' => ''])
 //                    ['redirect' => 'http://ecom-laravel8.herokuapp.com/google-sign-in-callback'])
 //            ->redirectUrl($redirect_url)
 //                ->redirect()
